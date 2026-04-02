@@ -34,8 +34,8 @@ const Header = () => {
           setIsLoggedIn(false);
         }
       })
-      .catch((err) => {
-        setIsLoggedIn(false)
+      .catch(() => {
+        setIsLoggedIn(false);
       });
   }, []);
 

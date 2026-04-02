@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, Facebook, Instagram, Youtube } from 'lucide-react';
+import { Mail, Phone, MapPin } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -28,7 +28,7 @@ const Footer = () => {
             <li><Link to="/storyline" className="hover:underline underline-offset-4 transition-all">Insight</Link></li>
             <li><Link to="/plans" className="hover:underline underline-offset-4 transition-all">Plans</Link></li>
             <li><Link to="/highlights" className="hover:underline underline-offset-4 transition-all">Connect</Link></li>
-            <li><Link to="/Policy" className="hover:underline underline-offset-4 transition-all">Policy</Link></li>
+            <li><Link to="/policy" className="hover:underline underline-offset-4 transition-all">Policy</Link></li>
           </ul>
         </div>
 

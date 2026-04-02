@@ -7,7 +7,7 @@ const { register, userLogin, sendOtp, verifyOtp,validate} = require("../controll
 router.post("/signup", register);
 router.post("/login", userLogin);
 router.post("/sendOtp", sendOtp);  // Route for sending OTP
-router.post("/VerifyOtp", verifyOtp); 
+router.post("/verifyOtp", verifyOtp); 
 router.get("/validate",validate) // Route for verifying OTP
 
 module.exports = router;

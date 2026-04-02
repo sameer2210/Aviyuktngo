@@ -4,29 +4,19 @@ import { Link } from 'react-router-dom';
 
 const Profile = () => {
   const [user, setUser] = useState(null);
-  const [transactions, setTransactions] = useState([]);
+  const transactions = [];
 
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const response = await axiosInstance.get('/profile/getUser');
+        const response = await axiosInstance.get('/profile/getuser');
         setUser(response.data.user);
       } catch (error) {
         console.error('Error fetching profile:', error);
       }
     };
 
-    const fetchTransactions = async () => {
-      try {
-        const res = await axiosInstance.get('/profile/transactions');
-        setTransactions(res.data.transactions || []);
-      } catch (error) {
-        console.error('Error fetching transactions:', error);
-      }
-    };
-
     fetchUserProfile();
-    fetchTransactions();
   }, []);
 
   const handleLogout = async () => {

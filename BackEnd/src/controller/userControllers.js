@@ -2,10 +2,6 @@ const userModel = require("../models/user.model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
-const otpGenerator = require("otp-generator");
-
-// Log email config to confirm it's loaded
-console.log("Configured email user:", process.env.EMAIL_USER);
 
 // Nodemailer transport setup with debugging
 const transporter = nodemailer.createTransport({
@@ -13,15 +9,6 @@ const transporter = nodemailer.createTransport({
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
-  }
-});
-
-
-transporter.verify((error, success) => {
-  if (error) {
-    console.error("SMTP Connection Error:", error);
-  } else {
-    console.log("SMTP Server is ready to send messages!", success);
   }
 });
 

@@ -45,13 +45,13 @@ const Slide = ({ bg, title, text, isActive }) => (
       <p className="text-lg md:text-xl max-w-2xl mb-6">{text}</p>
       <div className="flex gap-4 flex-wrap justify-center">
         <Link
-          to="/Highlights"
+          to="/highlights"
           className="px-6 py-2 border border-white text-white rounded-full hover:bg-white hover:text-black transition duration-300"
         >
           Become Member
         </Link>
         <Link
-          to="/Highlights"
+          to="/highlights"
           className="px-10 py-2 border border-white text-white rounded-full hover:bg-white hover:text-black transition duration-300"
         >
           Donate Now
@@ -115,7 +115,7 @@ const Home = () => {
           <div className='flex flex-col items-center text-center gap-4'>
             <div className='b-transparent hover:text-[#335288] hover:border-[#335288] border-1 px-4 py-3 rounded-full'>
               {/* Example icon */}
-              <i class="fa-solid fa-briefcase"></i>
+              <i className="fa-solid fa-briefcase"></i>
             </div>
             <h1 className='text-xl font-bold text-[#335288]'>Our Mission</h1>
             <p className='max-w-xs text-gray-700'>We aim to create lasting change through community-driven initiatives and education.</p>
@@ -125,7 +125,7 @@ const Home = () => {
           <div className='flex flex-col items-center text-center gap-4'>
             <div className='bg-transparent hover:text-[#335288] hover:border-[#335288] border-1 px-[15px] py-3 rounded-full'>
               {/* Example icon */}
-              <i class="fa-solid fa-hand-holding-dollar"></i>
+              <i className="fa-solid fa-hand-holding-dollar"></i>
             </div>
             <h1 className='text-xl font-bold text-[#335288]'>Make Donations</h1>
             <p className='max-w-xs text-gray-700'>Your support helps us bring vital resources to the people who need them most.</p>
@@ -135,7 +135,7 @@ const Home = () => {
           <div className='flex flex-col items-center text-center gap-4'>
             <div className='bg--transparent hover:text-[#335288] hover:border-[#335288] border-1 px-3.5 py-3 rounded-full'>
               {/* Example icon */}
-              <i class="fa-solid fa-handshake-angle"></i>
+              <i className="fa-solid fa-handshake-angle"></i>
             </div>
             <h1 className='text-xl font-bold text-[#335288]'>Become Volunteer</h1>
             <p className='max-w-xs text-gray-700'>Join our team of dedicated volunteers and help make a meaningful difference.</p>
@@ -495,7 +495,7 @@ const Home = () => {
 
         {/* Learn More Button */}
         <Link
-          to="/Plans"
+          to="/plans"
           className="absolute right-6 bottom-6 md:right-16 md:bottom-16 bg-[#335288] text-white pr-2 pl-3 py-2 rounded-full flex items-center gap-2 group"
         >
           Learn More

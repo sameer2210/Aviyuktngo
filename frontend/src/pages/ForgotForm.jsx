@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from '../instant/axios';
 import { useNavigate } from 'react-router-dom'; // <--- Added for redirect
 
@@ -16,7 +16,7 @@ function ForgotPass() {
       await axios.post('/api/auth/send-otp', { email });
       setStep(2);
       setError('');
-    } catch (error) {
+    } catch {
       setError('Error sending OTP');
     }
   };
@@ -26,7 +26,7 @@ function ForgotPass() {
       await axios.post('/api/auth/verify-otp', { email, otp });
       setStep(3);
       setError('');
-    } catch (error) {
+    } catch {
       setError('Invalid OTP');
     }
   };
@@ -43,7 +43,7 @@ function ForgotPass() {
         navigate('/');
       
 
-    } catch (error) {
+    } catch {
       setError('Error resetting password');
     }
   };

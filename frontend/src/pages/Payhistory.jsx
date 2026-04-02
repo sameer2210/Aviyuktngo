@@ -31,12 +31,12 @@ const PayHistory = () => {
 
     try {
       const res = await axiosInstance.post("/razorpay/payHistory", { adhar });
-      if (res.data.length == 0) {
+      if (res.data.length === 0) {
         setError("❌ No payment history found.");
       } else {
         setHistory(res.data);
       }
-    } catch (err) {
+    } catch {
       setError("❌ Server error or invalid Aadhaar.");
     }
   };

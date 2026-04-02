@@ -6,7 +6,6 @@ const router= express.Router();
 router.get("/getuser", author, async (req, res) => {
     try {
       const user = await userModel.findById(req.user.id);
-      console.log(user,"jksdhfsdfbjds hds fjsdfjhgsfv gvds ");
       
       if (!user) {
         return res.status(404).json({ message: "User not found" });

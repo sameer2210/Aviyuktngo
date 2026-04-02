@@ -2,6 +2,9 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ShieldCheck, LockKeyhole, Cookie, UserRoundCog, MailQuestion } from "lucide-react";
 
+const MotionDiv = motion.div;
+const MotionImg = motion.img;
+
 const sections = [
   {
     title: "Terms & Conditions",
@@ -35,7 +38,7 @@ export default function Policy() {
     <div className="bg-gradient-to-br from-white to-gray-50 min-h-screen">
       {/* Hero */}
       <div className="relative bg-gradient-to-tr from-[#335288] to-[#2c3e50] py-24 px-6 md:px-10 text-white text-center shadow-xl overflow-hidden">
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -46,7 +49,7 @@ export default function Policy() {
           <p className="max-w-2xl mx-auto text-lg md:text-xl font-light text-gray-200">
             Your trust matters. Here’s how we protect your data, respect your rights, and stay compliant.
           </p>
-        </motion.div>
+        </MotionDiv>
 
         {/* Glassy Background Circles */}
         <div className="absolute top-10 right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl animate-pulse" />
@@ -56,7 +59,7 @@ export default function Policy() {
       {/* Sections */}
       <div className="max-w-6xl mx-auto px-6 py-16 grid md:grid-cols-2 gap-8">
         {sections.map((section, index) => (
-          <motion.div
+          <MotionDiv
             key={index}
             className="bg-white backdrop-blur-md border border-gray-100 shadow-xl rounded-2xl p-6 relative hover:shadow-2xl transition-all group"
             initial={{ opacity: 0, y: 40 }}
@@ -69,14 +72,14 @@ export default function Policy() {
             </div>
             <h2 className="text-xl font-semibold text-gray-900 mb-3">{section.title}</h2>
             <p className="text-gray-600 text-base leading-relaxed">{section.content}</p>
-          </motion.div>
+          </MotionDiv>
         ))}
       </div>
 
       {/* Footer Certificate Styled */}
       <div className="text-center py-16 border-t border-gray-200 bg-white shadow-inner relative overflow-hidden">
-        <motion.img
-          src="../src/assets/logo.png"
+        <MotionImg
+          src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746258864/My%20Brand/logo_jo4h7x.png"
           alt="Aviyukt NGO"
           className="mx-auto w-24 h-auto mb-4"
           initial={{ scale: 0.9, opacity: 0 }}

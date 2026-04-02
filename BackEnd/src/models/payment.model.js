@@ -7,7 +7,7 @@ const paymentModel = mongoose.Schema({
     name:String,
     adhar:String,
     email:String,
-    addres:String,
+    address:String,
     occupation:String,
     street:String ,
     city: String,

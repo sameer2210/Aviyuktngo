@@ -51,7 +51,7 @@ const LoginPage = () => {
     <section className="font-['Roboto'] w-full min-h-screen mt-4 flex flex-col items-center justify-start md:justify-center bg-white px-4 py-6 md:py-2">
       <a href="#">
         <img
-          src="../src/assets/logo.png"
+          src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746258864/My%20Brand/logo_jo4h7x.png"
           alt="Logo"
           className="mx-auto w-24 md:w-28 mt-4 md:mt-10"
         />
