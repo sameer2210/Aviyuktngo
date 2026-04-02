@@ -26,6 +26,7 @@ const Footer = () => {
           <ul className="space-y-2">
             <li><Link to="/" className="hover:underline underline-offset-4 transition-all">Launch</Link></li>
             <li><Link to="/storyline" className="hover:underline underline-offset-4 transition-all">Insight</Link></li>
+            <li><Link to="/services" className="hover:underline underline-offset-4 transition-all">Services</Link></li>
             <li><Link to="/plans" className="hover:underline underline-offset-4 transition-all">Plans</Link></li>
             <li><Link to="/highlights" className="hover:underline underline-offset-4 transition-all">Connect</Link></li>
             <li><Link to="/policy" className="hover:underline underline-offset-4 transition-all">Policy</Link></li>

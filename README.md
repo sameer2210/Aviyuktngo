@@ -109,3 +109,17 @@ npm run preview
 
 - Frontend: Vercel (`frontend/vercel.json` includes SPA rewrite)
 - Backend: Any Node host (Render/Railway/etc.) with environment variables configured
+
+
+
+
+Object of service
+1)	Agriculture
+2)	Medicine
+3)	Health
+4)	Placement
+5)	Education
+6)	Rental work
+7)	Property ( purchase, loan, Registry, mutation)
+8)	Insurance (Legal Add court case work)
+9)	House Hold service provide

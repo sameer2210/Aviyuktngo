@@ -13,6 +13,9 @@ import Policy from './pages/Policy';
 import Credits from './pages/Credits';
 import ForgotForm from './pages/ForgotForm';
 import PayHistory from './pages/Payhistory.jsx';
+import Services from './pages/Services';
+import ServiceDetail from './pages/ServiceDetail';
+import { servicesData } from './data/servicesData';
 
 
 const App = () => {
@@ -31,7 +34,15 @@ const App = () => {
         <Route path="/credits" element={<Credits/>} />
         <Route path="/forgot-password" element={<ForgotForm/>} />
         <Route path="/payhistory" element={<PayHistory/>} />
-        
+        <Route path="/services" element={<Services />} />
+        {servicesData.map((service) => (
+          <Route
+            key={service.slug}
+            path={`/services/${service.slug}`}
+            element={<ServiceDetail serviceSlug={service.slug} />}
+          />
+        ))}
+        <Route path="/services/:slug" element={<ServiceDetail />} />
       </Routes>
       <Footer/>
     </>

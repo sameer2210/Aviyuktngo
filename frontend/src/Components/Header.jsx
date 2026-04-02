@@ -53,6 +53,7 @@ const Header = () => {
         <nav className="hidden md:flex bg-white text-lg py-3 w-auto px-5 text-black rounded-4xl justify-center gap-[3vw] items-center">
           <Link to="/" className="hover:underline underline-offset-[4px] transition-all duration-300">Launch</Link>
           <Link to="/storyline" className="hover:underline underline-offset-[4px] transition-all duration-300">Insight</Link>
+          <Link to="/services" className="hover:underline underline-offset-[4px] transition-all duration-300">Services</Link>
           <Link to="/plans" className="hover:underline underline-offset-[4px] transition-all duration-300">Plans</Link>
           <Link to="/highlights" className="hover:underline underline-offset-[4px] transition-all duration-300">Donate</Link>
         </nav>
@@ -92,6 +93,7 @@ const Header = () => {
         <div className="absolute top-full left-0 w-full bg-white text-center text-black flex flex-col gap-4 py-4 px-6 shadow-md md:hidden">
           <Link to="/" onClick={() => setMenuOpen(false)} className="hover:underline underline-offset-[4px] transition-all duration-300">Launch</Link>
           <Link to="/storyline" onClick={() => setMenuOpen(false)} className="hover:underline underline-offset-[4px] transition-all duration-300">Insight</Link>
+          <Link to="/services" onClick={() => setMenuOpen(false)} className="hover:underline underline-offset-[4px] transition-all duration-300">Services</Link>
           <Link to="/plans" onClick={() => setMenuOpen(false)} className="hover:underline underline-offset-[4px] transition-all duration-300">Plans</Link>
           <Link to="/highlights" onClick={() => setMenuOpen(false)} className="hover:underline underline-offset-[4px] transition-all duration-300">Connect</Link>
 
