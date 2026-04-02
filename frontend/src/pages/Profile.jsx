@@ -1,33 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import axiosInstance from '../instant/axios';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/useAuth';
 
 const Profile = () => {
-  const [user, setUser] = useState(null);
+  const { user, logout, isAuthLoading } = useAuth();
+  const navigate = useNavigate();
   const transactions = [];
 
-  useEffect(() => {
-    const fetchUserProfile = async () => {
-      try {
-        const response = await axiosInstance.get('/profile/getuser');
-        setUser(response.data.user);
-      } catch (error) {
-        console.error('Error fetching profile:', error);
-      }
-    };
-
-    fetchUserProfile();
-  }, []);
-
   const handleLogout = async () => {
-    try {
-      await axiosInstance.get('/profile/logout', { withCredentials: true });
-      localStorage.setItem('token', false);
-      window.location.href = '/';
-    } catch (error) {
-      console.error('Logout Error:', error);
-    }
+    await logout();
+    navigate('/');
   };
+
+  if (isAuthLoading) {
+    return (
+      <div className="min-h-screen bg-gray-100 flex justify-center items-center p-4 md:p-10">
+        <p className="text-gray-500">Loading profile...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 flex justify-center items-center p-4 md:p-10 font-['Roboto']">
@@ -44,9 +35,9 @@ const Profile = () => {
             {/* Profile Info */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
               <div>
-                <p className="text-gray-700"><span className="font-semibold">Full Name:</span> {user.fullname}</p>
+                <p className="text-gray-700"><span className="font-semibold">Full Name:</span> {user.name || 'N/A'}</p>
                 <p className="text-gray-700"><span className="font-semibold">Email:</span> {user.email}</p>
-                <p className="text-gray-700"><span className="font-semibold">Joined:</span> {new Date(user.createdAt).toLocaleDateString()}</p>
+                <p className="text-gray-700"><span className="font-semibold">Joined:</span> {user.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'N/A'}</p>
               </div>
               <div>
                 <p className="text-gray-700"><span className="font-semibold">Role:</span> {user.role || 'Donor'}</p>
@@ -111,3 +102,4 @@ const Profile = () => {
 };
 
 export default Profile;
+

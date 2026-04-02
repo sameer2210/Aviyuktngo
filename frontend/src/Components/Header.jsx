@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { FaUser } from 'react-icons/fa';
-import axiosInstance from '../instant/axios';
+import { useAuth } from '../context/useAuth';
 
 const Header = () => {
   const [showHeader, setShowHeader] = useState(true);
   const [scrollTop, setScrollTop] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isAuthenticated } = useAuth();
 
   // Scroll show/hide header
   useEffect(() => {
@@ -22,22 +22,6 @@ const Header = () => {
   }, [scrollTop]);
 
   const isAtTop = scrollTop < 10;
-
-  // Check login status from cookie session
-  useEffect(() => {
-    axiosInstance
-      .get('/user/validate', { withCredentials: true })
-      .then((res) => {
-        if (res.data.isLoggedIn) {
-          setIsLoggedIn(true);
-        } else {
-          setIsLoggedIn(false);
-        }
-      })
-      .catch(() => {
-        setIsLoggedIn(false);
-      });
-  }, []);
 
   return (
     <header
@@ -61,7 +45,7 @@ const Header = () => {
         {/* Login / Profile (Desktop) */}
         <div className="hidden md:block">
           <div className="flex justify-center items-center rounded-full">
-            {isLoggedIn ? (
+            {isAuthenticated ? (
               <Link to="/profile">
                 <div className='px-3.5 flex justify-center items-center gap-2 py-2 border-1 border-white rounded-full hover:bg-white hover:text-black transition duration-300'>
                 <FaUser className=" border-white" />
@@ -70,11 +54,11 @@ const Header = () => {
               </Link>
             ) : (
               <Link
-                to="/login"
+                to="/auth"
                 className={`relative overflow-hidden px-6 py-1.5 rounded-full transition duration-300
                 ${isAtTop ? 'bg-transparent text-white border border-white hover:bg-white hover:text-black' : 'bg-white text-black border border-white hover:bg-transparent hover:text-white'}`}
               >
-                <span className="relative z-10 text-lg">Login</span>
+                <span className="relative z-10 text-lg">Continue with Google</span>
               </Link>
             )}
           </div>
@@ -97,17 +81,17 @@ const Header = () => {
           <Link to="/plans" onClick={() => setMenuOpen(false)} className="hover:underline underline-offset-[4px] transition-all duration-300">Plans</Link>
           <Link to="/highlights" onClick={() => setMenuOpen(false)} className="hover:underline underline-offset-[4px] transition-all duration-300">Connect</Link>
 
-          {isLoggedIn ? (
+          {isAuthenticated ? (
             <Link to="/profile" onClick={() => setMenuOpen(false)}>
               <FaUser className="bg-black text-white px-4 py-1 rounded hover:text-black hover:bg-white transition duration-300" />
             </Link>
           ) : (
             <Link
-              to="/login"
+              to="/auth"
               onClick={() => setMenuOpen(false)}
               className="bg-black text-white px-4 py-1 rounded hover:text-black hover:bg-white transition duration-300"
             >
-              <span className="relative z-10">Login</span>
+              <span className="relative z-10">Continue with Google</span>
             </Link>
           )}
         </div>
@@ -117,3 +101,4 @@ const Header = () => {
 };
 
 export default Header;
+

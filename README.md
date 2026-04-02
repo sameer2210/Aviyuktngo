@@ -21,7 +21,7 @@ Aviyuktngo/
 ## Tech Stack
 
 - Frontend: React, Vite, Tailwind CSS, Axios, React Router
-- Backend: Node.js, Express, Mongoose, JWT, Nodemailer, Razorpay
+- Backend: Node.js, Express, Mongoose, JWT, Google OAuth, Razorpay
 - Database: MongoDB
 
 ## Prerequisites
@@ -42,9 +42,9 @@ Create `BackEnd/.env`:
 ```env
 PORT=3000
 MONGO_URI=your_mongodb_connection_string
-JWT_SEC=your_jwt_secret
-EMAIL_USER=your_email@gmail.com
-EMAIL_PASS=your_email_app_password
+JWT_SECRET=your_jwt_secret
+GOOGLE_CLIENT_ID=your_google_client_id
+FRONTEND_URLS=http://localhost:5173,https://your-frontend-domain.com
 RAZORPAY_KEY_ID=your_razorpay_key_id
 RAZORPAY_KEY_SECRET=your_razorpay_key_secret
 ```
@@ -68,6 +68,7 @@ Create `frontend/.env`:
 
 ```env
 VITE_API_BASE_URL=http://localhost:3000
+VITE_GOOGLE_CLIENT_ID=your_google_client_id
 VITE_RAZORPAY_KEY_ID=your_razorpay_key_id
 ```
 
@@ -90,18 +91,39 @@ npm run preview
 
 ## API Base Routes
 
-- `/user` -> signup/login/otp/validate
-- `/profile` -> user profile + logout
 - `/contact` -> contact capture
 - `/razorpay` -> payment create/verify/history
-- `/api/auth` -> forgot-password OTP flow
+- `/api/auth/google` -> Google sign-in/up (token verification + JWT cookie)
+- `/api/auth/me` -> current authenticated user
+- `/api/auth/logout` -> clear auth cookie
+
+## Authentication (Google Only)
+
+- Email/password login is removed.
+- Signup/register/OTP flows are removed.
+- Users can authenticate only via Google OAuth.
+- Backend verifies Google ID token before issuing JWT.
+- JWT is stored in an HTTP-only cookie.
+
+## Google Cloud Console Setup
+
+1. Go to Google Cloud Console and create/select a project.
+2. Open `APIs & Services` -> `OAuth consent screen` and configure app details.
+3. Add required scopes: `email`, `profile`, `openid`.
+4. Open `Credentials` -> `Create Credentials` -> `OAuth Client ID`.
+5. Choose `Web application`.
+6. Add Authorized JavaScript origins:
+   - `http://localhost:5173`
+   - your production frontend URL
+7. Copy the generated Client ID.
+8. Set:
+   - Backend: `GOOGLE_CLIENT_ID`
+   - Frontend: `VITE_GOOGLE_CLIENT_ID`
 
 ## Notes
 
 - CORS in backend currently allows:
-  - `http://localhost:5173`
-  - `https://aviyuktngoavn.vercel.app`
-  - `https://www.aviyuktngo.org`
+  - origins provided in `FRONTEND_URLS`
 - For local development, keep `VITE_API_BASE_URL=http://localhost:3000`.
 - Do not commit `.env` files.
 

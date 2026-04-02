@@ -1,11 +1,12 @@
 const express = require('express');
-const { sendOTP, verifyOTP, resetPassword } = require('../controller/authController');
-
+const { googleAuth, getCurrentUser, logout, getGoogleClientId } = require('../controller/authController');
+const authMiddleware = require('../middleware/authMiddleware');
 
 const router = express.Router();
 
-router.post('/send-otp', sendOTP);
-router.post('/verify-otp', verifyOTP);
-router.post('/reset-password', resetPassword);
+router.get('/google-client-id', getGoogleClientId);
+router.post('/google', googleAuth);
+router.get('/me', authMiddleware, getCurrentUser);
+router.post('/logout', logout);
 
 module.exports = router;

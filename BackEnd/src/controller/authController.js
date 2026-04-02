@@ -1,82 +1,135 @@
 
-
-
-const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const { OAuth2Client } = require('google-auth-library');
 const userModel = require('../models/user.model');
-const nodemailer = require('nodemailer');
 
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+const JWT_SECRET = process.env.JWT_SECRET || process.env.JWT_SEC;
+const TOKEN_COOKIE_NAME = 'token';
+const TOKEN_EXPIRY = 7 * 24 * 60 * 60; // 7 days
+const oauthClient = new OAuth2Client(GOOGLE_CLIENT_ID);
 
-const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 587,
-  secure: false, // use TLS
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
+const getCookieOptions = () => {
+  const isProduction = process.env.NODE_ENV === 'production';
+
+  return {
+    httpOnly: true,
+    secure: isProduction,
+    sameSite: isProduction ? 'None' : 'Lax',
+    maxAge: TOKEN_EXPIRY * 1000,
+  };
+};
+
+const getCookieClearOptions = () => {
+  const { maxAge, ...cookieOptions } = getCookieOptions();
+  return cookieOptions;
+};
+
+const getPublicUser = (user) => ({
+  id: user._id,
+  name: user.name,
+  email: user.email,
+  profilePic: user.profilePic || '',
+  createdAt: user.createdAt,
+  updatedAt: user.updatedAt,
 });
 
-
-const otpStore = {}; // Temporary OTP store
-
-// Send OTP
-exports.sendOTP = async (req, res) => {
-  const { email } = req.body;
-  const otp = Math.floor(100000 + Math.random() * 900000);
-  otpStore[email] = otp;
-
-  const mailOptions = {
-    from: process.env.EMAIL_USER,
-    to: email,
-    subject: 'Your OTP Code',
-    text: `Your OTP is: ${otp}`,
-  };
-
-  try {
-    await transporter.sendMail(mailOptions);
-    res.send({ message: 'OTP sent to your email!' });
-  } catch (error) {
-    console.error('Error sending OTP:', error);
-    res.status(500).send({ message: 'Error sending OTP' });
+const signToken = (userId) => {
+  if (!JWT_SECRET) {
+    throw new Error('JWT secret is not configured');
   }
+
+  return jwt.sign({ id: userId }, JWT_SECRET, { expiresIn: `${TOKEN_EXPIRY}s` });
 };
 
-// Verify OTP
-exports.verifyOTP = (req, res) => {
-  const { email, otp } = req.body;
+exports.googleAuth = async (req, res) => {
+  const googleToken = req.body?.token || req.body?.credential || req.body?.idToken;
 
-  if (otpStore[email] && otpStore[email] == otp) {
-    res.send({ message: 'OTP verified successfully!' });
-  } else {
-    res.status(400).send({ message: 'Invalid OTP' });
+  if (!googleToken) {
+    return res.status(400).json({ message: 'Google token is required' });
   }
-};
 
-// Reset Password
-exports.resetPassword = async (req, res) => {
-  const { email, newPassword } = req.body;
-
-  if (!otpStore[email]) {
-    return res.status(400).send({ message: 'OTP not verified or expired!' });
+  if (!GOOGLE_CLIENT_ID) {
+    return res.status(500).json({ message: 'GOOGLE_CLIENT_ID is not configured' });
   }
 
   try {
-    const user = await userModel.findOne({ email });
-    if (!user) {
-      return res.status(404).send({ message: 'User not found' });
+    const ticket = await oauthClient.verifyIdToken({
+      idToken: googleToken,
+      audience: GOOGLE_CLIENT_ID,
+    });
+
+    const payload = ticket.getPayload();
+    const googleId = payload?.sub;
+    const email = payload?.email?.toLowerCase();
+    const name = payload?.name || 'Aviyukt User';
+    const profilePic = payload?.picture || '';
+    const emailVerified = payload?.email_verified;
+
+    if (!googleId || !email) {
+      return res.status(400).json({ message: 'Invalid Google account data' });
     }
 
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
-    user.password = hashedPassword;
-    await user.save();
+    if (!emailVerified) {
+      return res.status(401).json({ message: 'Google email is not verified' });
+    }
 
-    delete otpStore[email];
-    res.send({ message: 'Password reset successful!' });
+    let user = await userModel.findOne({ email });
 
+    if (!user) {
+      user = await userModel.create({
+        name,
+        email,
+        profilePic,
+        googleId,
+      });
+    } else {
+      // Keep existing users compatible while moving to Google-only auth.
+      user.name = user.name || user.fullname || name;
+      user.profilePic = profilePic || user.profilePic || '';
+      user.googleId = user.googleId || googleId;
+      await user.save();
+    }
+
+    const token = signToken(user._id);
+    res.cookie(TOKEN_COOKIE_NAME, token, getCookieOptions());
+
+    return res.status(200).json({
+      user: getPublicUser(user),
+      token,
+    });
   } catch (error) {
-    console.error('Error resetting password:', error);
-    res.status(500).send({ message: 'Something went wrong, please try again later.' });
+    console.error('Google auth error:', error);
+    return res.status(401).json({ message: 'Google authentication failed' });
   }
+};
+
+exports.getCurrentUser = async (req, res) => {
+  try {
+    const user = await userModel.findById(req.user.id).select('_id name email profilePic createdAt updatedAt');
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    return res.status(200).json({ user: getPublicUser(user) });
+  } catch (error) {
+    console.error('Get current user error:', error);
+    return res.status(500).json({ message: 'Failed to fetch user' });
+  }
+};
+
+exports.logout = (req, res) => {
+  res.clearCookie(TOKEN_COOKIE_NAME, getCookieClearOptions());
+  return res.status(200).json({ message: 'Logged out successfully' });
+};
+
+exports.getGoogleClientId = (req, res) => {
+  if (!GOOGLE_CLIENT_ID) {
+    return res.status(500).json({ message: 'GOOGLE_CLIENT_ID is not configured' });
+  }
+
+  return res.status(200).json({ clientId: GOOGLE_CLIENT_ID });
 };
 
 

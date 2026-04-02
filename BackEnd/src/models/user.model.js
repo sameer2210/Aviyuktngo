@@ -1,34 +1,29 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-  fullname: {
+  name: {
     type: String,
-    required: true
+    required: true,
+    trim: true,
   },
   email: {
     type: String,
     required: true,
-    unique: true, // Ensures email is unique in the database
+    unique: true,
+    lowercase: true,
+    trim: true,
   },
-  password: {
+  profilePic: {
     type: String,
-    required: true
+    default: '',
   },
- 
-  otp: {
-    type: String, // To store OTP when sent for verification
-    default: ''
-  },
-  otpExpiration: {
-    type: Date,
-    required: false, // Date when the OTP expires
-  },
-  isVerified: {
-    type: Boolean,  // Flag to mark if the user has verified their email
-    default: false,
+  googleId: {
+    type: String,
+    unique: true,
+    sparse: true,
   },
 }, {
-  timestamps: true // Adds createdAt and updatedAt fields
+  timestamps: true,
 });
 
 const userModel = mongoose.model("users", userSchema);
