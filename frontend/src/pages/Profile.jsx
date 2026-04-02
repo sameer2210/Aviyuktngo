@@ -1,4 +1,5 @@
-import React from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { FiLogOut } from 'react-icons/fi';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/useAuth';
 
@@ -6,6 +7,81 @@ const Profile = () => {
   const { user, logout, isAuthLoading } = useAuth();
   const navigate = useNavigate();
   const transactions = [];
+
+  const createFallbackAvatar = (fullName, email) => {
+    const initials =
+      (fullName || email || 'AV')
+        .trim()
+        .split(/\s+/)
+        .slice(0, 2)
+        .map(part => part[0]?.toUpperCase() || '')
+        .join('') || 'AV';
+
+    const svg = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
+        <rect width="300" height="300" fill="#335288" />
+        <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" fill="#ffffff" font-size="110" font-family="Arial, sans-serif" font-weight="700">${initials}</text>
+      </svg>
+    `;
+
+    return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+  };
+
+  const normalizeProfileImage = rawLink => {
+    if (!rawLink || typeof rawLink !== 'string') return '';
+
+    let imageUrl = rawLink.trim();
+    if (!imageUrl) return '';
+
+    if (imageUrl.startsWith('http://')) {
+      imageUrl = imageUrl.replace(/^http:\/\//i, 'https://');
+    }
+
+    // Improve quality for Google profile photos.
+    if (/googleusercontent\.com/i.test(imageUrl)) {
+      imageUrl = imageUrl.replace(/=s\d+(-c)?$/i, '=s400-c').replace(/s96-c/gi, 's400-c');
+
+      // Ensure there is at least size 400 for better quality, preserve extras.
+      try {
+        const parsedUrl = new URL(imageUrl);
+        const size = Number(parsedUrl.searchParams.get('sz'));
+        if (!size || size < 400) {
+          parsedUrl.searchParams.set('sz', '400');
+        }
+        imageUrl = parsedUrl.toString();
+      } catch {
+        // ignore parse failure
+      }
+    }
+
+    return imageUrl;
+  };
+
+  const fallbackAvatar = useMemo(
+    () => createFallbackAvatar(user?.name, user?.email),
+    [user?.name, user?.email]
+  );
+
+  const imageCandidates = useMemo(() => {
+    return [user?.profilePic].map(normalizeProfileImage).filter(Boolean);
+  }, [user]);
+
+  const [profileImage, setProfileImage] = useState(fallbackAvatar);
+
+  useEffect(() => {
+    setProfileImage(imageCandidates[0] || fallbackAvatar);
+    console.log('Profile image candidates:', imageCandidates);
+  }, [imageCandidates, fallbackAvatar]);
+
+  const handleImageError = () => {
+    setProfileImage(current => {
+      const currentIndex = imageCandidates.indexOf(current);
+      if (currentIndex >= 0 && currentIndex < imageCandidates.length - 1) {
+        return imageCandidates[currentIndex + 1];
+      }
+      return fallbackAvatar;
+    });
+  };
 
   const handleLogout = async () => {
     await logout();
@@ -19,8 +95,6 @@ const Profile = () => {
       </div>
     );
   }
-
-  const profileImage = user?.profilePic || `https://i.pravatar.cc/150?u=${user?.email || 'default'}`;
 
   return (
     <div className="min-h-screen bg-gray-100 flex justify-center items-center p-4 md:p-10">
@@ -40,7 +114,9 @@ const Profile = () => {
               <div className="flex justify-center lg:justify-start">
                 <img
                   src={profileImage}
-                  alt="Profile"
+                  alt={user?.name ? `${user.name} profile` : 'Profile'}
+                  onError={handleImageError}
+                  loading="lazy"
                   className="w-40 h-40 rounded-full object-cover border-4 border-white shadow-xl"
                 />
               </div>
@@ -79,7 +155,9 @@ const Profile = () => {
                     <tbody>
                       {transactions.map((tx, index) => (
                         <tr key={index} className="bg-white border-b">
-                          <td className="px-4 py-2 text-sm">{new Date(tx.date).toLocaleDateString()}</td>
+                          <td className="px-4 py-2 text-sm">
+                            {new Date(tx.date).toLocaleDateString()}
+                          </td>
                           <td className="px-4 py-2 text-sm">{tx.cause}</td>
                           <td className="px-4 py-2 text-sm">₹{tx.amount}</td>
                           <td className="px-4 py-2 text-sm">{tx.status}</td>
@@ -96,8 +174,9 @@ const Profile = () => {
             <div className="flex flex-col md:flex-row gap-3 md:gap-4">
               <button
                 onClick={handleLogout}
-                className="w-full md:w-auto bg-[#335288] hover:bg-transparent hover:text-[#335288] text-white font-semibold border border-[#335288] py-2 px-6 rounded-md transition-all"
+                className="w-full md:w-auto inline-flex items-center justify-center gap-2 bg-[#335288] hover:bg-transparent hover:text-[#335288] text-white font-semibold border border-[#335288] py-2 px-6 rounded-md transition-all"
               >
+                <FiLogOut className="h-5 w-5" />
                 Logout
               </button>
               <Link

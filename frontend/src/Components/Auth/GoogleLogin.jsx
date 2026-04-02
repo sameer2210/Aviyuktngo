@@ -34,7 +34,7 @@ const GoogleLogin = () => {
   };
 
   return (
-    <div className="w-full max-w-md bg-white rounded-2xl shadow-lg border border-[#d7deee] p-6 sm:p-8">
+    <div className="w-full max-w-md ml-8 bg-white rounded-2xl shadow-lg border border-[#d7deee] p-6 sm:p-8">
       <h1 className="text-2xl sm:text-3xl font-serif text-[#335288] text-center mb-3">Welcome to Aviyukt NGO</h1>
       <p className="text-sm sm:text-base text-gray-600 text-center mb-6">
         Continue with your Google account to access your profile and services.
@@ -71,5 +71,3 @@ const GoogleLogin = () => {
 };
 
 export default GoogleLogin;
-
-

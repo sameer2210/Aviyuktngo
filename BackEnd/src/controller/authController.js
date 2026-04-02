@@ -1,4 +1,3 @@
-
 const jwt = require('jsonwebtoken');
 const { OAuth2Client } = require('google-auth-library');
 const userModel = require('../models/user.model');
@@ -25,7 +24,7 @@ const getCookieClearOptions = () => {
   return cookieOptions;
 };
 
-const getPublicUser = (user) => ({
+const getPublicUser = user => ({
   id: user._id,
   name: user.name,
   email: user.email,
@@ -34,7 +33,7 @@ const getPublicUser = (user) => ({
   updatedAt: user.updatedAt,
 });
 
-const signToken = (userId) => {
+const signToken = userId => {
   if (!JWT_SECRET) {
     throw new Error('JWT secret is not configured');
   }
@@ -106,7 +105,9 @@ exports.googleAuth = async (req, res) => {
 
 exports.getCurrentUser = async (req, res) => {
   try {
-    const user = await userModel.findById(req.user.id).select('_id name email profilePic createdAt updatedAt');
+    const user = await userModel
+      .findById(req.user.id)
+      .select('_id name email profilePic role status createdAt updatedAt');
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
@@ -131,8 +132,3 @@ exports.getGoogleClientId = (req, res) => {
 
   return res.status(200).json({ clientId: GOOGLE_CLIENT_ID });
 };
-
-
-
-
-

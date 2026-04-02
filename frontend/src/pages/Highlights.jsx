@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import axios from "../instant/axios";
 import { ChevronDownIcon } from "@heroicons/react/solid";
+import html2canvas from "html2canvas";
+import { jsPDF } from "jspdf";
 
 // FAQs
 const faqs = [
@@ -19,7 +21,7 @@ const faqs = [
 ];
 
 const Highlights = () => {
-  
+  const receiptRef = useRef(null);
   const [formType, setFormType] = useState("donor");
   const [form, setForm] = useState({
     amount: "",
@@ -34,12 +36,11 @@ const Highlights = () => {
     pincode: "",
     gender: "",
   });
-console.log(import.meta.env.VITE_RAZORPAY_KEY_ID)
-
   const [formErrors, setFormErrors] = useState({});
   const [paymentMessage, setPaymentMessage] = useState({ type: "", text: "" });
   const [paymentClip, setPaymentClip] = useState(null);
   const [openFAQ, setOpenFAQ] = useState(null);
+  const [isDownloadingReceipt, setIsDownloadingReceipt] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -148,13 +149,12 @@ console.log(import.meta.env.VITE_RAZORPAY_KEY_ID)
         order_id: id,
         handler: async function (response) {
           try {
-            const res= await axios.post("/razorpay/paymentverify", {
+            await axios.post("/razorpay/paymentverify", {
               razorpayOrderId: response.razorpay_order_id,
               razorpayPaymentId: response.razorpay_payment_id,
               signature: response.razorpay_signature,
             });
 
-            console.log(res.data);
             setPaymentClip({
               ...payload,
               paymentId: response.razorpay_payment_id,
@@ -208,6 +208,49 @@ console.log(import.meta.env.VITE_RAZORPAY_KEY_ID)
       pincode: "",
       gender: "",
     });
+  };
+
+  const handleDownloadReceipt = async () => {
+    if (!receiptRef.current || !paymentClip) return;
+
+    setIsDownloadingReceipt(true);
+
+    try {
+      const canvas = await html2canvas(receiptRef.current, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: "#ffffff",
+        windowWidth: receiptRef.current.scrollWidth,
+        windowHeight: receiptRef.current.scrollHeight,
+      });
+
+      const imageData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF({
+        orientation: "portrait",
+        unit: "pt",
+        format: "a4",
+      });
+
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      const imageWidth = canvas.width;
+      const imageHeight = canvas.height;
+
+      // Keep receipt on a single page by scaling to fit both width and height.
+      const scale = Math.min(pageWidth / imageWidth, pageHeight / imageHeight);
+      const renderWidth = imageWidth * scale;
+      const renderHeight = imageHeight * scale;
+      const x = (pageWidth - renderWidth) / 2;
+      const y = (pageHeight - renderHeight) / 2;
+
+      pdf.addImage(imageData, "PNG", x, y, renderWidth, renderHeight, undefined, "FAST");
+      pdf.save(`aviyukt-receipt-${paymentClip.orderId || Date.now()}.pdf`);
+    } catch (error) {
+      console.error("Receipt download error:", error);
+      setPaymentMessage({ type: "error", text: "❌ Failed to generate receipt PDF." });
+    } finally {
+      setIsDownloadingReceipt(false);
+    }
   };
 
   return (
@@ -387,10 +430,18 @@ console.log(import.meta.env.VITE_RAZORPAY_KEY_ID)
             </button>
           </form>
         ) : (
-          <div className="bg-white p-6 rounded-xl shadow-md text-gray-800 max-w-xl mx-auto font-sans relative border border-gray-200">
+          <div
+            ref={receiptRef}
+            className="bg-white p-6 rounded-xl shadow-md text-gray-800 max-w-xl mx-auto font-sans relative border border-gray-200"
+          >
           {/* Logo */}
           <div className="flex justify-center mb-4">
-            <img className="w-24" src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746258864/My%20Brand/logo_jo4h7x.png" alt="Logo" />
+            <img
+              className="w-24"
+              src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746258864/My%20Brand/logo_jo4h7x.png"
+              alt="Logo"
+              crossOrigin="anonymous"
+            />
           </div>
         
           {/* Message */}
@@ -429,10 +480,13 @@ console.log(import.meta.env.VITE_RAZORPAY_KEY_ID)
           {/* Download Button */}
           <div className="flex justify-center mt-5">
             <button
-              onClick={() => window.print()}
-              className="bg-[#335288] text-white px-5 py-2 rounded-md hover:bg-blue-400 transition text-sm font-medium shadow"
+              onClick={handleDownloadReceipt}
+              disabled={isDownloadingReceipt}
+              className={`bg-[#335288] text-white px-5 py-2 rounded-md transition text-sm font-medium shadow ${
+                isDownloadingReceipt ? "opacity-70 cursor-not-allowed" : "hover:bg-blue-400"
+              }`}
             >
-              Download Receipt
+              {isDownloadingReceipt ? "Preparing PDF..." : "Download Receipt"}
             </button>
           </div>
         </div>

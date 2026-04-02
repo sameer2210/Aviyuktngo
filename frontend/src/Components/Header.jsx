@@ -1,7 +1,7 @@
 import { Menu, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { FaUser } from 'react-icons/fa';
-import { Link, NavLink } from 'react-router-dom';
+import { FiLogOut } from 'react-icons/fi';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/useAuth';
 
 const navItems = [
@@ -16,7 +16,6 @@ const Header = () => {
   const [showHeader, setShowHeader] = useState(true);
   const [scrollTop, setScrollTop] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
-  const { isAuthenticated } = useAuth();
 
   // Scroll show/hide header.
   useEffect(() => {
@@ -29,7 +28,22 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [scrollTop]);
 
+  const navigate = useNavigate();
+  const { user, isAuthenticated, logout } = useAuth();
+
+  const headerProfileImage = user?.profilePic
+    ? user.profilePic
+        .trim()
+        .replace(/s96-c$/i, 's120-c')
+        .replace(/=s\d+(?:-c)?$/i, '=s120-c')
+    : `https://ui-avatars.com/api/?name=${encodeURIComponent(user?.name || user?.email || 'User')}&size=64&background=335288&color=ffffff`;
+
   const isAtTop = scrollTop < 10;
+
+  const handleLogout = async () => {
+    await logout();
+    navigate('/');
+  };
 
   return (
     <header
@@ -77,13 +91,29 @@ const Header = () => {
             {/* Login / Profile (Desktop) */}
             <div className="hidden md:flex justify-end">
               {isAuthenticated ? (
-                <Link
-                  to="/profile"
-                  className="inline-flex items-center gap-2 rounded-full border border-[#d4deee] bg-white px-4 py-2.5 text-[#223a63] font-medium hover:bg-[#f1f6ff] transition-colors"
-                >
-                  <FaUser />
-                  <span>Profile</span>
-                </Link>
+                <div className="inline-flex items-center gap-2">
+                  <Link
+                    to="/profile"
+                    className="inline-flex items-center gap-2 rounded-full border border-[#d4deee] bg-white px-2 py-1.5 hover:bg-[#f1f6ff] transition-colors"
+                  >
+                    <img
+                      src={headerProfileImage}
+                      alt={user?.name ? `${user.name} profile` : 'Profile'}
+                      className="h-8 w-8 rounded-full object-cover"
+                      onError={e => {
+                        e.currentTarget.onerror = null;
+                        e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(user?.name || user?.email || 'User')}&size=40&background=335288&color=ffffff`;
+                      }}
+                    />
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="inline-flex items-center gap-1 rounded-full border border-red-300 bg-white px-3 py-2 text-red-700 font-medium hover:bg-red-50 transition-colors"
+                    aria-label="Logout"
+                  >
+                    <FiLogOut />
+                  </button>
+                </div>
               ) : (
                 <Link
                   to="/auth"
@@ -127,14 +157,34 @@ const Header = () => {
 
                 <div className="pt-2">
                   {isAuthenticated ? (
-                    <Link
-                      to="/profile"
-                      onClick={() => setMenuOpen(false)}
-                      className="w-full inline-flex justify-center items-center gap-2 rounded-lg border border-[#d4deee] bg-white px-4 py-2.5 text-[#223a63] font-medium"
-                    >
-                      <FaUser />
-                      <span>Profile</span>
-                    </Link>
+                    <>
+                      <Link
+                        to="/profile"
+                        onClick={() => setMenuOpen(false)}
+                        className="w-full inline-flex justify-center items-center gap-2 rounded-lg border border-[#d4deee] bg-white px-4 py-2.5 text-[#223a63] font-medium mb-2"
+                      >
+                        <img
+                          src={headerProfileImage}
+                          alt={user?.name ? `${user.name} profile` : 'Profile'}
+                          className="h-6 w-6 rounded-full object-cover"
+                          onError={e => {
+                            e.currentTarget.onerror = null;
+                            e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(user?.name || user?.email || 'User')}&size=40&background=335288&color=ffffff`;
+                          }}
+                        />
+                        <span>Profile</span>
+                      </Link>
+                      <button
+                        onClick={async () => {
+                          await handleLogout();
+                          setMenuOpen(false);
+                        }}
+                        className="w-full inline-flex justify-center items-center gap-2 rounded-lg border border-red-300 bg-white px-4 py-2.5 text-red-700 font-medium hover:bg-red-50 transition-colors"
+                      >
+                        <FiLogOut />
+                        <span>Logout</span>
+                      </button>
+                    </>
                   ) : (
                     <Link
                       to="/auth"
