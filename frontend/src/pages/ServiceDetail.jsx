@@ -139,12 +139,12 @@ const ServiceDetail = ({ serviceSlug }) => {
                 </p>
               </div>
 
-              <a
+              {/* <a
                 href={`mailto:${CONTACT_EMAIL}?subject=${subject}`}
                 className="w-full inline-flex justify-center items-center gap-2 bg-[#335288] text-white py-2.5 rounded-lg hover:bg-[#274170] transition-colors"
               >
                 Contact Us
-              </a>
+              </a> */}
             </div>
 
             <div className="bg-white rounded-2xl shadow-md p-6">

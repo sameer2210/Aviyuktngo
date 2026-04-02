@@ -1,38 +1,38 @@
 // Reviews.jsx
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const reviews = [
   {
-    name: "Narayan Kumar",
-    role: "Member",
-    message: "An inspiring organization with a heart for real change.",
-    img: "https://res.cloudinary.com/dyvccryuz/image/upload/v1746259324/NaveenShrivastav_c7sa0p.jpg",
+    name: 'Narayan Kumar',
+    role: 'Member',
+    message: 'An inspiring organization with a heart for real change.',
+    img: 'https://res.cloudinary.com/dyvccryuz/image/upload/v1746259324/NaveenShrivastav_c7sa0p.jpg',
   },
   {
-    name: "Anand Chauhan",
-    role: "Donor",
+    name: 'Anand Chauhan',
+    role: 'Donor',
     message: "Proud to be a supporter. Aviyukt's transparency is remarkable.",
-    img: "https://res.cloudinary.com/dyvccryuz/image/upload/v1746259324/nandu_lfx39s.png",
+    img: 'https://res.cloudinary.com/dyvccryuz/image/upload/v1746259324/nandu_lfx39s.png',
   },
   {
-    name: "Vikram Rana",
-    role: "Doner",
-    message: "Joining Aviyukt was the best decision — it feels like family!",
-    img: "https://res.cloudinary.com/dyvccryuz/image/upload/v1746259327/vikku_fi4q4j.jpg",
+    name: 'sameer khan',
+    role: 'Doner',
+    message: 'Joining Aviyukt was the best decision — it feels like family!',
+    img: 'https://res.cloudinary.com/dc2geexnf/image/upload/v1775130745/1742237649179.jpg_c0lfze.jpg',
   },
   {
-    name: "Ankesh",
-    role: "Beneficiary",
-    message: "Our lives changed because Aviyukt believed in us.",
-    img: "https://res.cloudinary.com/dyvccryuz/image/upload/v1746259326/Anku_so4got.jpg",
+    name: 'Ankesh',
+    role: 'Beneficiary',
+    message: 'Our lives changed because Aviyukt believed in us.',
+    img: 'https://res.cloudinary.com/dyvccryuz/image/upload/v1746259326/Anku_so4got.jpg',
   },
   {
-    name: "Shukriti Shirvastava",
-    role: "Member",
-    message: "Incredible experience, true community empowerment!",
-    img: "https://res.cloudinary.com/dyvccryuz/image/upload/v1746259327/Shukrantishrivastava_vp5dmh.jpg",
+    name: 'Shukriti Shirvastava',
+    role: 'Member',
+    message: 'Incredible experience, true community empowerment!',
+    img: 'https://res.cloudinary.com/dyvccryuz/image/upload/v1746259327/Shukrantishrivastava_vp5dmh.jpg',
   },
 ];
 
