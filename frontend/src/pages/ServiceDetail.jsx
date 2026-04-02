@@ -3,8 +3,9 @@ import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft, CheckCircle2, PhoneCall, Mail, Send } from 'lucide-react';
 import { servicesData } from '../data/servicesData';
 
-const CONTACT_PHONE = '+91 8770321854';
+const CONTACT_PHONE = '+91 6265471204';
 const CONTACT_EMAIL = 'aviyuktngo@gmail.com';
+const WHATSAPP_NUMBER = '916265471204';
 
 const ServiceDetail = ({ serviceSlug }) => {
   const params = useParams();
@@ -28,6 +29,19 @@ const ServiceDetail = ({ serviceSlug }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    const whatsappMessage = [
+      'Hello Aviyukt NGO,',
+      '',
+      `Service: ${service.title}`,
+      `Name: ${formData.name}`,
+      `Email: ${formData.email}`,
+      `Message: ${formData.message}`,
+    ].join('\n');
+
+    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+
     setSubmitted(true);
     setFormData({
       name: '',
@@ -169,13 +183,13 @@ const ServiceDetail = ({ serviceSlug }) => {
                   className="w-full inline-flex justify-center items-center gap-2 border border-[#335288] text-[#335288] py-2.5 rounded-lg hover:bg-[#335288] hover:text-white transition-colors"
                 >
                   <Send className="w-4 h-4" />
-                  Get Help
+                  Contact Us
                 </button>
               </form>
 
               {submitted && (
                 <p className="mt-3 text-sm text-green-700 bg-green-50 rounded-md px-3 py-2">
-                  Thanks for reaching out. Our team will contact you soon.
+                  WhatsApp opened with your message details. Please tap send to complete.
                 </p>
               )}
             </div>
@@ -187,4 +201,3 @@ const ServiceDetail = ({ serviceSlug }) => {
 };
 
 export default ServiceDetail;
-
