@@ -3,9 +3,9 @@ import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft, CheckCircle2, PhoneCall, Mail, Send } from 'lucide-react';
 import { servicesData } from '../data/servicesData';
 
-const CONTACT_PHONE = '+91 6265471204';
+const CONTACT_PHONE = '+91 8770321854';
 const CONTACT_EMAIL = 'aviyuktngo@gmail.com';
-const WHATSAPP_NUMBER = '916265471204';
+const WHATSAPP_NUMBER = '918770321854';
 
 const ServiceDetail = ({ serviceSlug }) => {
   const params = useParams();
