@@ -1,5 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import Header from './Components/Header';
 import Home from './pages/Home';
 import Storyline from './pages/Storyline';
@@ -16,10 +17,13 @@ import { servicesData } from './data/servicesData';
 import Auth from './pages/Auth';
 import ProtectedRoute from './routes/ProtectedRoute';
 
-
 const App = () => {
   return (
     <>
+      <Helmet>
+        <title>Aviyukt NGO | Top NGO in Bhopal, MP, India</title>
+        <meta name="description" content="Aviyukt NGO is a leading non-profit organization in Bhopal, Madhya Pradesh, dedicated to empowering communities and creating a positive impact." />
+      </Helmet>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />

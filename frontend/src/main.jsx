@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { HelmetProvider } from 'react-helmet-async';
 import App from './App';
 import { AuthProvider } from './context/AuthContext';
 import './index.css'; // Tailwind or global CSS
@@ -11,11 +12,13 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 const RootWrapper = import.meta.env.DEV ? React.Fragment : React.StrictMode;
 
 const appTree = (
-  <AuthProvider>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </AuthProvider>
+  <HelmetProvider>
+    <AuthProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </AuthProvider>
+  </HelmetProvider>
 );
 
 const renderApp = (googleClientId) => {
