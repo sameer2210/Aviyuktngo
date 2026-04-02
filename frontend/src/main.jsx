@@ -8,6 +8,7 @@ import './index.css'; // Tailwind or global CSS
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080';
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const RootWrapper = import.meta.env.DEV ? React.Fragment : React.StrictMode;
 
 const appTree = (
   <AuthProvider>
@@ -21,7 +22,7 @@ const renderApp = (googleClientId) => {
   const normalizedClientId = googleClientId?.trim();
 
   root.render(
-    <React.StrictMode>
+    <RootWrapper>
       {normalizedClientId ? (
         <GoogleOAuthProvider clientId={normalizedClientId}>
           {appTree}
@@ -29,7 +30,7 @@ const renderApp = (googleClientId) => {
       ) : (
         appTree
       )}
-    </React.StrictMode>
+    </RootWrapper>
   );
 };
 
