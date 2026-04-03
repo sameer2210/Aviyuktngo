@@ -11,6 +11,13 @@ const team = [
     email: 'ankeshbarahdiya05112002@gmail.com',
     linkedin: 'https://www.linkedin.com/in/ankesh-barahdiya-8704142b6',
   },
+    {
+    name: 'Ankesh Barhadiya',
+    role: 'Co-Founder & Tech Lead',
+    image: 'https://res.cloudinary.com/dyvccryuz/image/upload/v1746259326/Anku_so4got.jpg',
+    email: 'ankeshbarahdiya05112002@gmail.com',
+    linkedin: 'https://www.linkedin.com/in/ankesh-barhadiya05112002/',
+  },
   {
     name: 'Sameer khan',
     role: ' Co-Founder  & Tech Lead',
@@ -20,13 +27,7 @@ const team = [
     linkedin: 'https://www.linkedin.com/in/sameer-khan2210/',
   },
 
-  {
-    name: 'Ankesh Barhadiya',
-    role: 'Co-Founder & Tech Lead',
-    image: 'https://res.cloudinary.com/dyvccryuz/image/upload/v1746259326/Anku_so4got.jpg',
-    email: 'ankeshbarahdiya05112002@gmail.com',
-    linkedin: 'https://www.linkedin.com/in/ankesh-barhadiya05112002/',
-  },
+
   {
     name: 'Deepti Lodhi',
     role: 'Co-Founder & Tech Lead',
