@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { FiLogOut } from 'react-icons/fi';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/useAuth';
+import SkeletonImage from './SkeletonImage';
 
 const navItems = [
   { label: 'Launch', path: '/' },
@@ -31,12 +32,14 @@ const Header = () => {
   const navigate = useNavigate();
   const { user, isAuthenticated, logout } = useAuth();
 
+  const headerProfileFallback = `https://ui-avatars.com/api/?name=${encodeURIComponent(user?.name || user?.email || 'User')}&size=64&background=335288&color=ffffff`;
+
   const headerProfileImage = user?.profilePic
     ? user.profilePic
         .trim()
         .replace(/s96-c$/i, 's120-c')
         .replace(/=s\d+(?:-c)?$/i, '=s120-c')
-    : `https://ui-avatars.com/api/?name=${encodeURIComponent(user?.name || user?.email || 'User')}&size=64&background=335288&color=ffffff`;
+    : headerProfileFallback;
 
   const isAtTop = scrollTop < 10;
 
@@ -60,7 +63,7 @@ const Header = () => {
           <div className="h-16 md:h-[72px] grid grid-cols-[auto_1fr_auto] items-center gap-3 px-3 md:px-4">
             {/* Logo */}
             <Link to="/" className="inline-flex items-center">
-              <img
+              <SkeletonImage
                 className="h-12 w-12 md:h-14 md:w-14 rounded-full object-cover ring-1 ring-[#d7dfef]"
                 src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746258864/My%20Brand/logo_jo4h7x.png"
                 alt="Aviyukt NGO Logo"
@@ -96,14 +99,11 @@ const Header = () => {
                     to="/profile"
                     className="inline-flex items-center gap-2 rounded-full border border-[#d4deee] bg-white px-2 py-1.5 hover:bg-[#f1f6ff] transition-colors"
                   >
-                    <img
+                    <SkeletonImage
                       src={headerProfileImage}
+                      fallbackSrc={headerProfileFallback}
                       alt={user?.name ? `${user.name} profile` : 'Profile'}
                       className="h-8 w-8 rounded-full object-cover"
-                      onError={e => {
-                        e.currentTarget.onerror = null;
-                        e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(user?.name || user?.email || 'User')}&size=40&background=335288&color=ffffff`;
-                      }}
                     />
                   </Link>
                   <button
@@ -163,14 +163,11 @@ const Header = () => {
                         onClick={() => setMenuOpen(false)}
                         className="w-full inline-flex justify-center items-center gap-2 rounded-lg border border-[#d4deee] bg-white px-4 py-2.5 text-[#223a63] font-medium mb-2"
                       >
-                        <img
+                        <SkeletonImage
                           src={headerProfileImage}
+                          fallbackSrc={headerProfileFallback}
                           alt={user?.name ? `${user.name} profile` : 'Profile'}
                           className="h-6 w-6 rounded-full object-cover"
-                          onError={e => {
-                            e.currentTarget.onerror = null;
-                            e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(user?.name || user?.email || 'User')}&size=40&background=335288&color=ffffff`;
-                          }}
                         />
                         <span>Profile</span>
                       </Link>
@@ -191,7 +188,7 @@ const Header = () => {
                       onClick={() => setMenuOpen(false)}
                       className="w-full inline-flex justify-center items-center rounded-lg bg-[#335288] px-4 py-2.5 text-white font-medium"
                     >
-                      Continue with Google
+                      Login
                     </Link>
                   )}
                 </div>
@@ -205,3 +202,4 @@ const Header = () => {
 };
 
 export default Header;
+

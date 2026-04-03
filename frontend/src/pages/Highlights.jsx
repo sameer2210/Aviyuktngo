@@ -3,6 +3,7 @@ import html2canvas from 'html2canvas';
 import { jsPDF } from 'jspdf';
 import { useRef, useState } from 'react';
 import axios from '../instant/axios';
+import SkeletonImage from '../Components/SkeletonImage';
 
 const faqs = [
   {
@@ -473,7 +474,7 @@ const Highlights = () => {
                     marginBottom: '20px',
                   }}
                 >
-                  <img
+                  <SkeletonImage
                     src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746258864/My%20Brand/logo_jo4h7x.png"
                     alt="Aviyukt Logo"
                     crossOrigin="anonymous"
@@ -797,3 +798,4 @@ const Highlights = () => {
 };
 
 export default Highlights;
+

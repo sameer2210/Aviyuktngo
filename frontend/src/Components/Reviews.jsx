@@ -2,6 +2,7 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import SkeletonImage from "./SkeletonImage";
 
 const reviews = [
   {
@@ -72,7 +73,7 @@ const Reviews = () => {
         {reviews.map((review, index) => (
           <div key={index} className="px-4">
             <div className="bg-white/80 backdrop-blur-md mb-6 rounded-2xl shadow-lg p-8 flex flex-col items-center text-center transition-all hover:scale-105 hover:shadow-2xl duration-500 min-h-[400px]">
-              <img
+              <SkeletonImage
                 src={review.img}
                 alt={review.name}
                 className="w-20 h-20 rounded-full object-cover mb-6 border-4 border-[#335288]"
@@ -89,3 +90,4 @@ const Reviews = () => {
 };
 
 export default Reviews;
+

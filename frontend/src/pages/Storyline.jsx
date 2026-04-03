@@ -1,6 +1,7 @@
 import React from 'react';
 import StatsSection from '../Components/StatsSection';
 import Reviews from '../Components/Reviews';
+import SkeletonImage from '../Components/SkeletonImage';
 
 
 const Storyline = () => {
@@ -30,13 +31,13 @@ const Storyline = () => {
     {/* Images Section */}
     <div className="flex items-center justify-center gap-4 mb-8 md:mb-0 w-full md:w-1/2">
       <div className="h-36 w-24 md:h-[45vh] md:w-[6.5vw] overflow-hidden rounded-full rotate-12">
-      <img className='object-cover h-full w-full hover:scale-[1.1] transition duration-400' src="https://images.unsplash.com/photo-1596380297284-406d17428771?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+      <SkeletonImage className='object-cover h-full w-full hover:scale-[1.1] transition duration-400' src="https://images.unsplash.com/photo-1596380297284-406d17428771?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
       </div>
       <div className="h-40 w-24 md:h-[60vh] md:w-[6.5vw] rounded-full rotate-12 overflow-hidden">
-      <img className='h-full w-full object-cover hover:scale-[1.1] transition duration-400' src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746258779/photo23_m0mmu8.jpg" alt="" />
+      <SkeletonImage className='h-full w-full object-cover hover:scale-[1.1] transition duration-400' src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746258779/photo23_m0mmu8.jpg" alt="" />
       </div>
       <div className="h-36 w-24 md:h-[50vh] md:w-[6.5vw] rounded-full rotate-12 overflow-hidden">
-      <img className='h-full w-full object-cover hover:scale-[1.1] transition duration-400' src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+      <SkeletonImage className='h-full w-full object-cover hover:scale-[1.1] transition duration-400' src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
       </div>
     </div>
 
@@ -86,7 +87,7 @@ const Storyline = () => {
 
   {/* Image Section */}
   <div className="w-full md:w-1/2 flex justify-center">
-    <img 
+    <SkeletonImage 
       className="w-full h-auto max-h-[600px] object-cover object-bottom rounded-lg"
       src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746259323/about1_ppp4tc.jpg" 
       alt="About Us Image" 
@@ -97,7 +98,7 @@ const Storyline = () => {
    {/* Our Vision Section */}
 <div className="w-full flex flex-col md:flex-row items-center justify-between bg-white py-8 px-4 md:px-8">
   <div className="w-full rounded-xl md:w-[40vw] flex justify-center items-center mb-6 md:mb-0 overflow-hidden">
-    <img className="w-full h-[50vh] max-h-[450px] object-cover hover:scale-[1.1] duration-400 transition" src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746258779/photo21_rbv6ny.jpg" alt="Our Vision" />
+    <SkeletonImage className="w-full h-[50vh] max-h-[450px] object-cover hover:scale-[1.1] duration-400 transition" src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746258779/photo21_rbv6ny.jpg" alt="Our Vision" />
   </div>
   <div className="w-full md:w-1/2 flex flex-col justify-center items-center md:items-end text-center md:text-right p-4 md:p-8">
     <h1 className="text-2xl md:text-3xl text-[#335288] mb-4 font-serif">Our Vision</h1>
@@ -110,7 +111,7 @@ const Storyline = () => {
 {/* Our Mission Section */}
 <div className="w-full flex flex-col md:flex-row-reverse items-center justify-between bg-white py-8 px-4 md:px-8">
   <div className="w-full rounded-xl md:w-[40vw] flex justify-center items-center mb-6 md:mb-0 overflow-hidden">
-    <img className="w-full h-[50vh] max-h-[350px] object-cover hover:scale-[1.1] duration-400 transition" src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746258777/photo14_kthtqb.jpg" alt="Our Mission" />
+    <SkeletonImage className="w-full h-[50vh] max-h-[350px] object-cover hover:scale-[1.1] duration-400 transition" src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746258777/photo14_kthtqb.jpg" alt="Our Mission" />
   </div>
   <div className="w-full md:w-1/2 flex flex-col justify-center items-center md:items-start text-center md:text-left p-4 md:p-8">
     <h1 className="text-2xl md:text-3xl text-[#335288] mb-4 font-serif">Our Mission</h1>
@@ -129,7 +130,7 @@ const Storyline = () => {
   <div className="w-full flex flex-wrap justify-center gap-8">
     {/* Single Card */}
     <div className="bg-white flex flex-col items-center p-6 w-[90%] sm:w-[45%] md:w-[30%] lg:w-[22%] shadow-md rounded-lg">
-      <img className="h-[180px] w-[125px] object-cover rounded-full mb-4" src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746259325/President_uwnwyz.jpg" alt="President" />
+      <SkeletonImage className="h-[180px] w-[125px] object-cover rounded-full mb-4" src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746259325/President_uwnwyz.jpg" alt="President" />
       <h2 className="text-xl font-serif mb-2">President</h2>
       <p className="text-lg text-[#335288] mb-3">Narayan Kumar Shrivastav</p>
       <hr className="h-[2px] bg-[#335288] w-[80%] mb-4" />
@@ -137,7 +138,7 @@ const Storyline = () => {
     </div>
 
     <div className="bg-white flex flex-col items-center p-6 w-[90%] sm:w-[45%] md:w-[30%] lg:w-[22%] shadow-md rounded-lg">
-      <img className="h-[180px] object-cover rounded-full mb-4" src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746259327/SashiMishra_hkgc3u.jpg" alt="Vice President" />
+      <SkeletonImage className="h-[180px] object-cover rounded-full mb-4" src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746259327/SashiMishra_hkgc3u.jpg" alt="Vice President" />
       <h2 className="text-xl font-serif mb-2">Vice President</h2>
       <p className="text-lg text-[#335288] mb-3">Sashi Mishra</p>
       <hr className="h-[2px] bg-[#335288] w-[80%] mb-4" />
@@ -145,7 +146,7 @@ const Storyline = () => {
     </div>
 
     <div className="bg-white flex flex-col items-center p-6 w-[90%] sm:w-[45%] md:w-[30%] lg:w-[22%] shadow-md rounded-lg">
-      <img className="h-[180px] object-cover rounded-full mb-4" src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746259323/BrajeshPratapSingh_yxnij7.jpg" alt="Secretary" />
+      <SkeletonImage className="h-[180px] object-cover rounded-full mb-4" src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746259323/BrajeshPratapSingh_yxnij7.jpg" alt="Secretary" />
       <h2 className="text-xl font-serif mb-2">Secretary</h2>
       <p className="text-lg text-[#335288] mb-3">Brajesh Pratap Singh</p>
       <hr className="h-[2px] bg-[#335288] w-[80%] mb-4" />
@@ -153,7 +154,7 @@ const Storyline = () => {
     </div>
 
     <div className="bg-white flex flex-col items-center p-6 w-[90%] sm:w-[45%] md:w-[30%] lg:w-[22%] shadow-md rounded-lg">
-      <img className="h-[180px] object-cover rounded-full mb-4" src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746259327/Shukrantishrivastava_vp5dmh.jpg" alt="Joint Secretary" />
+      <SkeletonImage className="h-[180px] object-cover rounded-full mb-4" src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746259327/Shukrantishrivastava_vp5dmh.jpg" alt="Joint Secretary" />
       <h2 className="text-xl font-serif mb-2">Joint Secretary</h2>
       <p className="text-lg text-[#335288] mb-3">Dr. Shukranti Shrivastava</p>
       <hr className="h-[2px] bg-[#335288] w-[80%] mb-4" />
@@ -163,7 +164,7 @@ const Storyline = () => {
     {/* Second Row */}
 
     <div className="bg-white flex flex-col items-center p-6 w-[90%] sm:w-[45%] md:w-[30%] lg:w-[22%] shadow-md rounded-lg">
-      <img className="h-[180px] object-cover rounded-full mb-4" src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746259326/sapna_ulr1sk.jpg" alt="Treasurer" />
+      <SkeletonImage className="h-[180px] object-cover rounded-full mb-4" src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746259326/sapna_ulr1sk.jpg" alt="Treasurer" />
       <h2 className="text-xl font-serif mb-2">Treasurer</h2>
       <p className="text-lg text-[#335288] mb-3">Sapna Shrivastava</p>
       <hr className="h-[2px] bg-[#335288] w-[80%] mb-4" />
@@ -171,7 +172,7 @@ const Storyline = () => {
     </div>
 
     <div className="bg-white flex flex-col items-center p-6 w-[90%] sm:w-[45%] md:w-[30%] lg:w-[22%] shadow-md rounded-lg">
-      <img className="h-[180px] object-cover rounded-full mb-4" src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746259323/awadh_yizveu.jpg" alt="Board Member" />
+      <SkeletonImage className="h-[180px] object-cover rounded-full mb-4" src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746259323/awadh_yizveu.jpg" alt="Board Member" />
       <h2 className="text-xl font-serif mb-2">Board Member</h2>
       <p className="text-lg text-[#335288] mb-3">Awadh Bihari Gautum</p>
       <hr className="h-[2px] bg-[#335288] w-[80%] mb-4" />
@@ -179,7 +180,7 @@ const Storyline = () => {
     </div>
 
     <div className="bg-white flex flex-col items-center p-6 w-[90%] sm:w-[45%] md:w-[30%] lg:w-[22%] shadow-md rounded-lg">
-      <img className="h-[180px] object-cover rounded-full mb-4" src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746259325/pankaj_owsjx4.png" alt="Board Member" />
+      <SkeletonImage className="h-[180px] object-cover rounded-full mb-4" src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746259325/pankaj_owsjx4.png" alt="Board Member" />
       <h2 className="text-xl font-serif mb-2">Board Member</h2>
       <p className="text-lg text-[#335288] mb-3">Pankaj Kumar Panthi</p>
       <hr className="h-[2px] bg-[#335288] w-[80%] mb-4" />
@@ -197,3 +198,4 @@ const Storyline = () => {
 }
 
 export default Storyline;
+

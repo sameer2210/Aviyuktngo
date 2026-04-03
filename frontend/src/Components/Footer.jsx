@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin } from 'lucide-react';
+import SkeletonImage from './SkeletonImage';
 
 const Footer = () => {
   return (
@@ -13,7 +14,7 @@ const Footer = () => {
 
         {/* Logo and About */}
         <div>
-          <img src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746258864/My%20Brand/logo_jo4h7x.png" alt="Logo" className="w-24 mb-4" />
+          <SkeletonImage src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746258864/My%20Brand/logo_jo4h7x.png" alt="Logo" className="w-24 mb-4" />
           <p className="text-gray-600 text-sm">
             Crafting experiences that leave a mark.  
             Let's make something amazing together.
@@ -89,3 +90,4 @@ const Footer = () => {
 };
 
 export default Footer;
+

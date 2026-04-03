@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { FiLogOut } from 'react-icons/fi';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/useAuth';
+import SkeletonImage from '../Components/SkeletonImage';
 
 const Profile = () => {
   const { user, logout, isAuthLoading } = useAuth();
@@ -112,7 +113,7 @@ const Profile = () => {
           <div className="p-6 md:p-8 space-y-6">
             <div className="grid grid-cols-1 lg:grid-cols-[170px_1fr] gap-6 items-center">
               <div className="flex justify-center lg:justify-start">
-                <img
+                <SkeletonImage
                   src={profileImage}
                   alt={user?.name ? `${user.name} profile` : 'Profile'}
                   onError={handleImageError}
@@ -196,3 +197,4 @@ const Profile = () => {
 };
 
 export default Profile;
+

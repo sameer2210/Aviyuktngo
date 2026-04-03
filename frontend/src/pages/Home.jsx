@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'; // make sure you're using react-router
 import StatsSection from '../Components/StatsSection';
 import HighlightsSlider from '../Components/HighlightsSlider';
+import SkeletonImage from '../Components/SkeletonImage';
 import axios from '../instant/axios';
 const slides = [
   {
@@ -33,14 +34,17 @@ const slides = [
 
 const Slide = ({ bg, title, text, isActive }) => (
   <div
-    className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${isActive ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
-    style={{
-      backgroundImage: `url(${bg})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-    }}
+    className={`absolute inset-0 overflow-hidden transition-opacity duration-1000 ease-in-out ${isActive ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
   >
-    <div className="h-full w-full flex flex-col items-center justify-center text-center text-white px-4 bg-black/40">
+    <SkeletonImage
+      src={bg}
+      alt={title}
+      wrapperClassName="absolute inset-0 h-full w-full"
+      className="h-full w-full object-cover"
+      loading={isActive ? 'eager' : 'lazy'}
+      fetchPriority={isActive ? 'high' : 'auto'}
+    />
+    <div className="relative h-full w-full flex flex-col items-center justify-center text-center text-white px-4 bg-black/40">
       <h1 className="text-5xl md:text-6xl font-bold mb-4">{title}</h1>
       <p className="text-lg md:text-xl max-w-2xl mb-6">{text}</p>
       <div className="flex gap-4 flex-wrap justify-center">
@@ -172,7 +176,7 @@ const Home = () => {
             {/* Card 1 */}
             <div className='min-w-full md:min-w-1/2 lg:min-w-1/3 p-2 md:p-4'>
               <div className='bg-white rounded-lg shadow-md overflow-hidden flex flex-col items-center'>
-                <img
+                <SkeletonImage
                   className='h-48 w-full object-cover hover:scale-[1.1] transition duration-300'
                   src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746258778/photo17_ljomim.jpg"
                   alt="Support Education"
@@ -187,7 +191,7 @@ const Home = () => {
             {/* Card 2 */}
             <div className='min-w-full md:min-w-1/2 lg:min-w-1/3 p-2 md:p-4'>
               <div className='bg-white rounded-lg shadow-md overflow-hidden flex flex-col items-center'>
-                <img
+                <SkeletonImage
                   className='h-48 w-full object-cover hover:scale-110 transition duration-300'
                   src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746258778/photo16_osxlpx.jpg"
                   alt="Healthcare Aid"
@@ -203,7 +207,7 @@ const Home = () => {
             {/* Card 3 */}
             <div className='min-w-full md:min-w-1/2 lg:min-w-1/3 p-2 md:p-4'>
               <div className='bg-white rounded-lg shadow-md overflow-hidden flex flex-col items-center'>
-                <img
+                <SkeletonImage
                   className='h-48 w-full object-cover hover:scale-[1.1] transition duration-300'
                   src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746258778/photo9_c2ukbt.jpg"
                   alt="Feed the Hungry"
@@ -218,7 +222,7 @@ const Home = () => {
             {/* Card 4 */}
             <div className='min-w-full md:min-w-1/2 lg:min-w-1/3 p-2 md:p-4'>
               <div className='bg-white rounded-lg shadow-md overflow-hidden flex flex-col items-center'>
-                <img
+                <SkeletonImage
                   className='h-48 w-full object-cover hover:scale-[1.1] transition duration-300'
                   src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746258776/photo1_blwial.jpg"
                   alt="Disaster Relief"
@@ -233,7 +237,7 @@ const Home = () => {
             {/* Card 5 */}
             <div className='min-w-full md:min-w-1/2 lg:min-w-1/3 p-2 md:p-4'>
               <div className='bg-white rounded-lg shadow-md overflow-hidden flex flex-col items-center'>
-                <img
+                <SkeletonImage
                   className='h-48 w-full object-cover hover:scale-[1.1] transition duration-300'
                   src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746258777/photo2_xov8qg.jpg"
                   alt="Women Empowerment"
@@ -248,7 +252,7 @@ const Home = () => {
             {/* Card 6 */}
             <div className='min-w-full md:min-w-1/2 lg:min-w-1/3 p-2 md:p-4'>
               <div className='bg-white rounded-lg shadow-md overflow-hidden flex flex-col items-center'>
-                <img
+                <SkeletonImage
                   className='h-48 w-full object-cover hover:scale-[1.1] transition duration-300'
                   src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746258777/photo13_idz2pi.jpg"
                   alt="Save Environment"
@@ -263,7 +267,7 @@ const Home = () => {
             {/* Card 7 */}
             <div className='min-w-full md:min-w-1/2 lg:min-w-1/3 p-2 md:p-4'>
               <div className='bg-white rounded-lg shadow-md overflow-hidden flex flex-col items-center'>
-                <img
+                <SkeletonImage
                   className='h-48 w-full object-cover hover:scale-[1.1] transition duration-300'
                   src="https://images.pexels.com/photos/6235021/pexels-photo-6235021.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
                   alt="Animal Welfare"
@@ -278,7 +282,7 @@ const Home = () => {
             {/* Card 8 */}
             <div className='min-w-full md:min-w-1/2 lg:min-w-1/3 p-2 md:p-4'>
               <div className='bg-white rounded-lg shadow-md overflow-hidden flex flex-col items-center'>
-                <img
+                <SkeletonImage
                   className='h-48 w-full object-cover hover:scale-[1.1] transition duration-300'
                   src="https://plus.unsplash.com/premium_photo-1702088085024-85e3cdd462fa?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                   alt="Art and Culture"
@@ -309,7 +313,7 @@ const Home = () => {
 
           {/* Image Side */}
           <div className="w-full md:w-[50%] h-full flex justify-center md:justify-end">
-            <img className="h-[60vh] object-contain" src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746259327/volunteer_a8negb.png" alt="" />
+            <SkeletonImage className="h-[60vh] object-contain" src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746259327/volunteer_a8negb.png" alt="" />
           </div>
 
         </div>
@@ -356,7 +360,7 @@ const Home = () => {
 
         {/* Left big image */}
         <div className="relative h-[30vh] md:h-[53vh] w-full md:w-[25%] overflow-hidden group">
-          <img
+          <SkeletonImage
             src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746258778/photo8_igrw89.jpg"
             alt=""
             className="h-full w-full object-cover transform group-hover:scale-110 transition-all duration-500"
@@ -375,7 +379,7 @@ const Home = () => {
 
             {/* Small image */}
             <div className="relative h-[30vh] md:h-[25vh] w-full md:w-[20vw] overflow-hidden group">
-              <img
+              <SkeletonImage
                 src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746258779/photo23_m0mmu8.jpg"
                 alt=""
                 className="h-full w-full object-cover transform group-hover:scale-110 transition-all duration-500"
@@ -401,7 +405,7 @@ const Home = () => {
           <div className='flex justify-between items-center gap-5'>
 
             <div className="relative h-[30vh] md:h-[25vh] w-full md:w-[32%] overflow-hidden group">
-              <img
+              <SkeletonImage
                 src="https://images.unsplash.com/photo-1622908961227-ebf9ccdc342d?q=80&w=2134&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt=""
                 className="h-full w-full object-cover transform group-hover:scale-110 transition-all duration-500"
@@ -413,7 +417,7 @@ const Home = () => {
             </div>
 
             <div className="relative h-[30vh] md:h-[25vh] w-full md:w-[32%] overflow-hidden group">
-              <img
+              <SkeletonImage
                 src="https://images.unsplash.com/photo-1709122066713-4c904721a378?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt=""
                 className="h-full w-full object-cover transform group-hover:scale-110 transition-all duration-500"
@@ -425,7 +429,7 @@ const Home = () => {
             </div>
 
             <div className="relative h-[30vh] md:h-[25vh] w-full md:w-[32%] overflow-hidden group">
-              <img
+              <SkeletonImage
                 src="https://images.pexels.com/photos/764681/pexels-photo-764681.jpeg?auto=compress&cs=tinysrgb&w=600"
                 alt=""
                 className="h-full w-full object-cover transform group-hover:scale-110 transition-all duration-500"
@@ -446,7 +450,7 @@ const Home = () => {
         <div className="flex flex-wrap justify-center items-center gap-8 mb-25">
           {/* Card 1 */}
           <div className="h-auto w-full sm:w-[80%] md:w-[45%] lg:w-[28%] flex flex-col items-center">
-            <img
+            <SkeletonImage
               className="w-full h-[250px] object-cover rounded-md hover:rotate-6 transition-all duration-300"
               src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746258776/photo12_i7kftb.jpg"
               alt="Plant Trees"
@@ -462,7 +466,7 @@ const Home = () => {
 
           {/* Card 2 */}
           <div className="h-auto w-full sm:w-[80%] md:w-[45%] lg:w-[28%] flex flex-col pb-10 items-center">
-            <img
+            <SkeletonImage
               className="w-full h-[250px] object-cover rounded-md hover:rotate-6 transition-all duration-300"
               src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746258779/photo19_yaqpxi.jpg"
               alt="Awareness Campaign"
@@ -478,7 +482,7 @@ const Home = () => {
 
           {/* Card 3 */}
           <div className="h-auto w-full sm:w-[80%] md:w-[45%] lg:w-[28%] flex flex-col items-center">
-            <img
+            <SkeletonImage
               className="w-full h-[250px] object-cover rounded-md hover:rotate-6 transition-all duration-300"
               src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746258777/photo5_vi1ugb.jpg"
               alt="Forest Conservation"
@@ -508,3 +512,4 @@ const Home = () => {
 };
 
 export default Home;
+

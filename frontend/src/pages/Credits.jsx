@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaLinkedin, FaEnvelope } from "react-icons/fa";
+import SkeletonImage from "../Components/SkeletonImage";
 
 const team = [
   {
@@ -72,7 +73,7 @@ const Credits = () => {
           >
             {/* Hexagonal Image Frame */}
             <div className="mx-auto relative w-32 h-32 mb-6 hexagon-clip">
-              <img
+              <SkeletonImage
                 src={member.image}
                 alt={member.name}
                 className="object-cover w-full h-full object-top"
@@ -159,3 +160,4 @@ const Credits = () => {
 };
 
 export default Credits;
+

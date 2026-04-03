@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import SkeletonImage from '../Components/SkeletonImage';
 
 const categories = [
   "All",
@@ -161,10 +162,13 @@ const ProjectsPage = () => {
   className="relative w-full h-[50vh] flex items-center justify-center text-white"
 >
   {/* Background Image */}
-  <img
+  <SkeletonImage
     src="https://images.unsplash.com/photo-1660553688466-f399a96f5f57?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     alt="Hero Background"
-    className="absolute inset-0 w-full h-full object-cover"
+    wrapperClassName="absolute inset-0 w-full h-full"
+    className="w-full h-full object-cover"
+    loading="eager"
+    fetchPriority="high"
   />
 
   {/* Black Transparent Overlay */}
@@ -203,7 +207,11 @@ const ProjectsPage = () => {
           <div key={project.id} className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
             {/* Image */}
             <div className="h-48 w-full overflow-hidden">
-              <img src={project.image} alt={project.title} className="w-full h-full object-cover hover:scale-[1.1] transition duration-400" />
+              <SkeletonImage
+                src={project.image}
+                alt={project.title}
+                className="w-full h-full object-cover hover:scale-[1.1] transition duration-400"
+              />
             </div>
 
             {/* Details */}
@@ -269,9 +277,10 @@ const ProjectsPage = () => {
         key={index}
         className="break-inside-avoid overflow-hidden rounded-2xl shadow-lg hover:scale-[1.02] transition-transform duration-300 ease-in-out"
       >
-        <img
+        <SkeletonImage
           src={src}
           alt={`project-${index}`}
+          wrapperClassName="w-full min-h-[180px]"
           className="w-full h-auto object-cover rounded-2xl"
         />
       </div>
@@ -283,7 +292,7 @@ const ProjectsPage = () => {
   {/* Optional glowing overlay effect */}
   <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-white/5 to-transparent rounded-3xl pointer-events-none"></div>
 
-  <img
+  <SkeletonImage
     className="w-[80%] max-w-[800px] object-contain z-10"
     src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746259327/project_yjyfdq.png"
     alt="Project"
@@ -296,3 +305,4 @@ const ProjectsPage = () => {
 };
 
 export default ProjectsPage;
+

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { FaInstagram, FaYoutube, FaFacebook } from "react-icons/fa";
+import SkeletonImage from "./SkeletonImage";
 
 export default function HighlightsSlider() {
   const sliderRef = useRef(null);
@@ -107,7 +108,7 @@ export default function HighlightsSlider() {
 
             {/* Right Side */}
             <div className="max-w-full md:max-w-[50%]">
-              <img
+              <SkeletonImage
                 src={slide.image}
                 alt={slide.heading}
                 className="w-[80vw] md:w-[50vw] h-[60vh] object-cover rounded-lg mx-auto"
@@ -133,3 +134,4 @@ export default function HighlightsSlider() {
     </div>
   );
 }
+
