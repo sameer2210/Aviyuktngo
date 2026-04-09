@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import Header from './Components/Header';
+import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
 import { servicesData } from './data/servicesData';
 import ProtectedRoute from './routes/ProtectedRoute';
@@ -36,7 +36,7 @@ const App = () => {
         <title>Aviyukt NGO | Top NGO in Bhopal, MP, India</title>
         <meta name="description" content="Aviyukt NGO is a leading non-profit organization in Bhopal, Madhya Pradesh, dedicated to empowering communities and creating a positive impact." />
       </Helmet>
-      <Header />
+      <Navbar />
       <Suspense fallback={<RouteFallback />}>
         <Routes>
           <Route path="/" element={<Home />} />
