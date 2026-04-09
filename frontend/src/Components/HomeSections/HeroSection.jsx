@@ -121,7 +121,7 @@ const HeroSection = () => {
               transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
               className="max-w-4xl pt-8 md:pt-14"
             >
-              <p className="hero-overline text-sm uppercase tracking-[0.34em] text-[#ece4d4]/92 sm:text-base">
+              <p className="hero-overline text-xs sm:text-sm md:text-base uppercase tracking-[0.2em] sm:tracking-[0.34em] text-[#ece4d4]/92">
                 {activeSlide.eyebrow}
               </p>
 
@@ -129,7 +129,7 @@ const HeroSection = () => {
                 variants={reduceMotion ? {} : titleContainerVariants}
                 initial={reduceMotion ? false : 'hidden'}
                 animate={reduceMotion ? {} : 'show'}
-                className="hero-display-title mt-4 max-w-[20ch] text-[clamp(4rem,5vw,4rem)] uppercase leading-[1.05] tracking-[0.2em]"
+                className="hero-display-title mt-3 sm:mt-4 max-w-[20ch] text-4xl sm:text-5xl md:text-[4rem] uppercase leading-tight md:leading-[1.05] tracking-widest sm:tracking-[0.2em] break-words"
               >
                 {titleWords.map((word, index) => (
                   <motion.span
@@ -156,7 +156,7 @@ const HeroSection = () => {
             animate={reduceMotion ? {} : { opacity: 1, x: 0 }}
             exit={reduceMotion ? {} : { opacity: 0, x: 20 }}
             transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
-            className="hero-vertical-text absolute right-2 top-1/2 hidden -translate-y-1/2 text-[clamp(1rem,4.4vw,1rem)] text-[#f8f1e5] drop-shadow-[0_8px_28px_rgba(0,0,0,0.45)] lg:block"
+            className="hero-vertical-text absolute right-2 top-1/2 hidden -translate-y-1/2 text-sm lg:text-base text-[#f8f1e5] drop-shadow-[0_8px_28px_rgba(0,0,0,0.45)] xl:block whitespace-nowrap"
           >
             A world of deep, ethereal beauty.
           </motion.p>
@@ -172,10 +172,10 @@ const HeroSection = () => {
               transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
               className="max-w-5xl"
             >
-              <p className="hero-display-title text-[1.65rem] uppercase tracking-[0.08em] text-[#f1e8d8]">
+              <p className="hero-display-title text-xl sm:text-[1.65rem] uppercase tracking-[0.08em] text-[#f1e8d8] mb-1 sm:mb-0">
                 Event
               </p>
-              <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-end">
+              <div className="mt-2 sm:mt-3 flex flex-col gap-3 sm:flex-row sm:items-end">
                 <div className="flex gap-2">
                   <div className="h-20 w-28 overflow-hidden border border-white/40 bg-black/30">
                     <SkeletonImage
@@ -195,15 +195,15 @@ const HeroSection = () => {
                   </div>
                 </div>
 
-                <div className="space-y-2">
-                  <p className="text-[clamp(1rem,2.1vw,1.9rem)] font-semibold leading-[1.25] text-[#f5ecde]">
+                <div className="space-y-1 sm:space-y-2 mt-2 sm:mt-0">
+                  <p className="text-lg sm:text-xl lg:text-[1.9rem] font-semibold leading-[1.25] text-[#f5ecde]">
                     {activeEvent.title}
                   </p>
-                  <div className="inline-flex flex-wrap items-center gap-3 text-[#f1e7d7]">
-                    <span className="border border-[#f1e7d7]/70 px-2 py-1 text-sm font-semibold uppercase tracking-[0.1em]">
+                  <div className="inline-flex flex-wrap items-center gap-2 sm:gap-3 text-[#f1e7d7]">
+                    <span className="border border-[#f1e7d7]/70 px-2 py-1 text-xs sm:text-sm font-semibold uppercase tracking-[0.1em]">
                       Event dates:
                     </span>
-                    <span className="text-[1.12rem] font-semibold">{activeEvent.dates}</span>
+                    <span className="text-sm sm:text-[1.12rem] font-semibold">{activeEvent.dates}</span>
                   </div>
                 </div>
               </div>

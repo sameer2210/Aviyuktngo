@@ -61,6 +61,8 @@ const Home = () => {
     <>
       <HeroSection />
       <AimMissionSection />
+      <HomeStaticSections />
+
       {/* project section start */}
       <div className="hidden md:flex w-[90vw] mx-auto justify-between items-center gap-5 py-10">
         {/* Left big image */}
@@ -154,7 +156,6 @@ const Home = () => {
       <TransparencySection />
       <TrustHighlightsSection />
       <CtaSection />
-      <HomeStaticSections />
 
       <div className="min-h-[50vh] w-full flex flex-col md:flex-row justify-center items-center ">
         {/* Text Side */}
@@ -174,7 +175,7 @@ const Home = () => {
                 <input
                   type="email"
                   name="email"
-                  className="h-12 flex-1 min-w-70 border border-zinc-500 outline-none sm:rounded-tl-xl px-2 bg-white"
+                  className="h-12 flex-1 min-w-70 border text-black border-zinc-500 outline-none sm:rounded-tl-xl px-2 bg-white/35"
                   placeholder="Enter your email"
                   value={formData.email}
                   onChange={handleChange}

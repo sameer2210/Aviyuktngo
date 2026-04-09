@@ -29,6 +29,8 @@ const galleryImages = [
   'https://res.cloudinary.com/dc2geexnf/image/upload/v1775758274/558bbe83-c94e-4d9b-8395-50f8df170193.jpg_u4ocuf.jpg',
   'https://images.unsplash.com/photo-1759675934052-1d82517c76c8?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
 ];
+const statsBackgroundImage =
+  'https://images.unsplash.com/photo-1546833998-07256bcc76ad?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
 
 const PatternBg = () => (
   <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
@@ -157,8 +159,11 @@ const AimMissionSection = () => {
         </div>
       </section>
 
-      <section className="bg-[#f4f3ef] px-4 pb-14 pt-10 sm:px-6 md:px-10 md:pb-24">
-        <div className="mx-auto max-w-7xl overflow-hidden rounded-3xl border border-[#1b1a18]/12 bg-[#f9f8f4] shadow-sm">
+      <section className="bg-[#f4f3ef]">
+        <div
+          className="mx-auto max-w-7xl overflow-hidden  rounded-3xl border border-[#1b1a18]/12 bg-cover bg-blend-overlay bg-center shadow-sm"
+          style={{ backgroundImage: `url(${statsBackgroundImage})` }}
+        >
           <StatsSection />
         </div>
       </section>

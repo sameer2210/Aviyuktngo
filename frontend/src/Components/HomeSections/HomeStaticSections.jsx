@@ -4,8 +4,8 @@ const HomeStaticSections = () => {
   return (
     <>
       <div className="h-auto w-full bg-[#EBEBEB]">
-    
-        <div className="h-auto w-full md:w-[70%] mx-auto py-10">
+
+        <div className="h-auto w-full md:w-[70%] mx-auto ">
           <div className="flex justify-between items-center mb-6 px-4">
             <h1 className="text-2xl md:text-3xl font-serif text-[#335288]">Our Cause</h1>
             <div className="flex gap-4">

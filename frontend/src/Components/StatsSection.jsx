@@ -111,8 +111,8 @@ const StatsSection = () => {
   }
 
   return (
-    <section className="relative overflow-hidden bg-[#f5f8ff] px-4 py-14 sm:px-6 md:px-8 md:py-18">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(51,82,136,0.12),_transparent_45%)]" />
+    <section className="relative overflow-hidden  px-4 py-14 sm:px-6 md:px-8 md:py-18">
+      <div className="pointer-events-none absolute bg-blend-overlay inset-0 bg-[radial-gradient(circle_at_top,_rgba(51,82,136,0.12),_transparent_10%)]" />
 
       <div className="relative mx-auto max-w-[1700px]">
         <motion.p
@@ -120,7 +120,7 @@ const StatsSection = () => {
           whileInView={reduceMotion ? {} : { opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.6 }}
           transition={{ duration: 0.45 }}
-          className="mb-8 text-center text-sm font-semibold uppercase tracking-[0.12em] text-[#335288] md:mb-10 md:text-[1.02rem]"
+          className="mb-8 text-center text-black text-sm font-bold uppercase tracking-[0.12em] md:mb-10 md:text-[1.02rem]"
         >
           The Numbers Speak
         </motion.p>
