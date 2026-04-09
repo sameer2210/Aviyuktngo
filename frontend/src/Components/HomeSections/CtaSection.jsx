@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Mail, MapPin, Phone } from 'lucide-react';
+import { ArrowRight, Mail, MapPin, Phone, Send } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import axios from '../../instant/axios';
+import SkeletonImage from '../SkeletonImage';
 import { sharedContact } from '../../data/homepageContent';
-import { reveal, stagger } from './motion';
+
+const WHATSAPP_NUMBER = '918770321854';
 
 const CtaSection = () => {
-  const [formData, setFormData] = useState({ email: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [submitState, setSubmitState] = useState({ type: '', message: '' });
 
   const handleChange = event => {
@@ -17,101 +18,142 @@ const CtaSection = () => {
     }));
   };
 
-  const handleSubmit = async event => {
+  const handleSubmit = event => {
     event.preventDefault();
 
-    try {
-      await axios.post('/contact/email', formData);
-      setSubmitState({
-        type: 'success',
-        message: 'Thank you. We will connect with you shortly.',
-      });
-      setFormData({ email: '' });
-    } catch {
-      setSubmitState({
-        type: 'error',
-        message: 'Unable to submit right now. Please try again.',
-      });
-    }
+    const whatsappMessage = [
+      'Hello Aviyukt NGO,',
+      '',
+      `Name: ${formData.name}`,
+      `Email: ${formData.email}`,
+      `Message: ${formData.message}`,
+    ].join('\n');
+
+    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+
+    setSubmitState({
+      type: 'success',
+      message: 'WhatsApp opened with your message details. Please tap send to complete.',
+    });
+    setFormData({ name: '', email: '', message: '' });
   };
 
   return (
-    <section className="py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-[radial-gradient(circle_at_top,#13203a_0%,#050a15_68%)]">
-      <motion.div
-        variants={stagger}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.25 }}
-        className="max-w-6xl mx-auto grid grid-cols-1 xl:grid-cols-[1.2fr_1fr] gap-6"
-      >
-        <motion.article variants={reveal} className="glass-card soft-shadow rounded-3xl p-7 md:p-9">
-          <p className="uppercase tracking-[0.24em] text-xs text-[#aab6ce]">Take Action</p>
-          <h2 className="font-serif text-3xl md:text-5xl text-[#f5f1e8] mt-3">Join, Donate, and Build Change</h2>
-          <p className="mt-5 text-[#d1d9eb] leading-relaxed max-w-2xl">
-            Your support helps us extend education, healthcare, women empowerment, and livelihood interventions to families who need consistent, respectful support.
-          </p>
+    <section className="bg-white text-black font-sans pb-4">
+      <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-12 py-20 pb-0">
+        <div className="border-t border-gray-300">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-col md:flex-row border-b border-gray-300 group overflow-hidden"
+          >
+            {/* Left text & form section */}
+            <div className="w-full md:w-1/2 p-8 md:p-16 lg:p-24 flex flex-col items-start bg-transparent transition-colors duration-500 group-hover:bg-gray-50/50">
+              <span className="text-[11px] md:text-xs font-semibold tracking-[0.2em] uppercase mb-16 flex items-center gap-3">
+                <span className="text-gray-300">[</span>
+                <span className="text-gray-900 transition-colors duration-300 hover:text-gray-500">TAKE ACTION</span>
+                <span className="text-gray-300">]</span>
+              </span>
 
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              to="/highlights"
-              className="luminous-btn inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold"
-            >
-              Donate Securely
-              <ArrowRight size={16} />
-            </Link>
-            <Link
-              to="/highlights"
-              className="inline-flex items-center rounded-full border border-white/35 px-6 py-3 text-sm font-semibold text-[#eef2fb] hover:bg-white/10 transition-colors"
-            >
-              Become a Member
-            </Link>
-          </div>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold uppercase tracking-tighter mb-8 text-black" style={{ letterSpacing: '-0.02em', lineHeight: '1.1' }}>
+                Join, Donate &amp;<br />Build Change
+              </h2>
 
-          <div className="mt-8 space-y-3 text-[#d4ddef]">
-            <p className="inline-flex items-center gap-2">
-              <Phone size={16} />
-              {sharedContact.phone}
-            </p>
-            <p className="inline-flex items-center gap-2">
-              <Mail size={16} />
-              {sharedContact.email}
-            </p>
-            <p className="inline-flex items-center gap-2">
-              <MapPin size={16} />
-              {sharedContact.location}
-            </p>
-          </div>
-        </motion.article>
-
-        <motion.article variants={reveal} className="glass-card rounded-3xl p-7 md:p-9 soft-shadow">
-          <h3 className="font-serif text-3xl text-[#f4f0e7]">Stay Connected</h3>
-          <p className="mt-3 text-[#ccd6ea]">Share your email and our team will reach out with updates and opportunities.</p>
-
-          <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full rounded-xl border border-white/25 bg-white/10 px-4 py-3 outline-none text-[#f0efe9] placeholder:text-[#b6c2dd] focus:border-[#c2d7ff]"
-              placeholder="Enter your email"
-              required
-            />
-            <button type="submit" className="luminous-btn w-full rounded-xl px-4 py-3 text-sm font-semibold">
-              Submit
-            </button>
-            {submitState.message && (
-              <p
-                className={`text-sm ${
-                  submitState.type === 'success' ? 'text-emerald-300' : 'text-rose-300'
-                }`}
-              >
-                {submitState.message}
+              <p className="text-gray-600 text-sm md:text-base leading-loose font-light mb-12">
+                Your support helps us extend education, healthcare, women empowerment, and livelihood interventions to families who need consistent, respectful support.
               </p>
-            )}
-          </form>
-        </motion.article>
-      </motion.div>
+
+              <div className="flex flex-wrap gap-4 mb-12 w-full">
+                <Link
+                  to="/highlights"
+                  className="inline-flex items-center gap-2 bg-black text-white px-8 py-4 text-sm font-bold uppercase tracking-wider hover:bg-gray-800 transition-colors"
+                >
+                  Donate Securely
+                  <ArrowRight size={16} />
+                </Link>
+                <Link
+                  to="/highlights"
+                  className="inline-flex items-center px-8 py-4 text-sm font-bold uppercase tracking-wider border border-black text-black hover:bg-black hover:text-white transition-colors"
+                >
+                  Become a Member
+                </Link>
+              </div>
+
+
+
+              <div className="mt-12 space-y-4 text-gray-500 font-light text-sm w-full">
+                <p className="flex items-center gap-3 border-b border-gray-100 pb-2">
+                  <Phone size={16} className="text-black" />
+                  {sharedContact.phone}
+                </p>
+                <p className="flex items-center gap-3 border-b border-gray-100 pb-2">
+                  <Mail size={16} className="text-black" />
+                  {sharedContact.email}
+                </p>
+                <p className="flex items-center gap-3 pt-2">
+                  <MapPin size={16} className="text-black" />
+                  {sharedContact.location}
+                </p>
+              </div>
+            </div>
+
+            {/* Right Form section */}
+            <div className="w-full md:w-1/2 flex items-center justify-center p-6 sm:p-10 md:p-16 lg:p-24 bg-gray-50 border-l border-transparent md:border-gray-200">
+              <div className="w-full max-w-xl bg-white border border-gray-200 p-8 md:p-10 shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_40px_rgba(0,0,0,0.08)] transition-shadow">
+                <h3 className="text-xl font-bold uppercase tracking-tight mb-6">Send a Message via WhatsApp</h3>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder="Your Name"
+                      required
+                      className="w-full border-b border-gray-300 px-3 py-3 outline-none focus:border-black transition-colors"
+                    />
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="Your Email"
+                      required
+                      className="w-full border-b border-gray-300 px-3 py-3 outline-none focus:border-black transition-colors"
+                    />
+                  </div>
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    placeholder="How can we help you?"
+                    rows={3}
+                    required
+                    className="w-full border-b border-gray-300 px-3 py-3 outline-none focus:border-black transition-colors resize-none mt-4"
+                  />
+
+                  <button
+                    type="submit"
+                    className="w-full mt-6 inline-flex justify-center items-center gap-2 border border-black text-black py-4 uppercase font-bold text-sm tracking-wider hover:bg-black hover:text-white transition-colors"
+                  >
+                    <Send className="w-4 h-4" />
+                    Contact via WhatsApp
+                  </button>
+                </form>
+
+                {submitState.message && (
+                  <p className={`mt-4 text-sm font-medium ${submitState.type === 'success' ? 'text-green-600' : 'text-red-600'}`}>
+                    {submitState.message}
+                  </p>
+                )}
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
     </section>
   );
 };

@@ -5,8 +5,9 @@ import StatsSection from '../StatsSection';
 
 const visionHTML = (
   <>
-    <span className="text-[#a48c5b]">To create a just and equitable</span> society where every individual has access to{' '}
-    <span className="text-[#a48c5b]">education, healthcare</span>, and opportunities for dignified living.
+    <span className="text-[#6a94ff]">To create a just and equitable</span> society where every
+    individual has access to <span className="text-[#6a94ff]">education, healthcare</span>, and
+    opportunities for dignified living.
   </>
 );
 
@@ -90,21 +91,21 @@ const AimMissionSection = () => {
           <div className="flex flex-col pt-10">
             <FadeUp>
               <div className="flex items-center gap-6 mb-16">
-                <h2 className="museum-serif text-sm sm:text-base font-semibold uppercase tracking-[0.2em] text-[#131211]">
+                <h2 className="museum-serif text-sm sm:text-base font-semibold uppercase tracking-[0.2em] text-[#102e54]">
                   ABOUT AVIYUKT VISION AIM AND MISSION
                 </h2>
               </div>
             </FadeUp>
 
             <FadeUp delay={0.1}>
-              <h3 className="museum-serif max-w-[42rem] mb-6 text-[2rem] sm:text-[2.5rem] lg:text-[3.25rem] leading-[1.3] tracking-wide text-[#3c3b38]">
+              <h3 className="museum-serif max-w-[42rem] mb-6 text-[2rem] sm:text-[2.5rem] lg:text-[3.25rem] leading-[1.3] tracking-wide text-black">
                 {visionHTML}
               </h3>
             </FadeUp>
 
             <FadeUp delay={0.2} className="mt-10 lg:mt-12 space-y-4">
               {missionPoints.map((point, index) => (
-                <p key={index} className="museum-serif text-[1rem] sm:text-[1.1rem] leading-[1.8] text-[#2c2b29] max-w-[36rem]">
+                <p key={index} className="museum-serif text-[1rem] sm:text-[1.1rem] leading-[1.8] text-[#0d2238] max-w-[36rem]">
                   {point}
                 </p>
               ))}
