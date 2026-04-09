@@ -78,6 +78,58 @@ export const slides = [
   },
 ];
 
+export const impactShowcaseTiles = [
+  {
+    id: 'field-impact',
+    title: 'FIELD IMPACT',
+    subtitle: 'On-ground actions with communities',
+    image: 'https://res.cloudinary.com/dyvccryuz/image/upload/v1746258778/photo8_igrw89.jpg',
+  },
+  {
+    id: 'community-care',
+    title: 'COMMUNITY CARE',
+    subtitle: 'Health, awareness, and local support',
+    image: 'https://res.cloudinary.com/dyvccryuz/image/upload/v1746258779/photo23_m0mmu8.jpg',
+  },
+  {
+    id: 'livelihood',
+    title: 'LIVELIHOOD',
+    subtitle: 'Skills, dignity, and economic resilience',
+    image: 'https://res.cloudinary.com/dyvccryuz/image/upload/v1746258779/photo19_yaqpxi.jpg',
+  },
+];
+
+export const statsHighlights = [
+  {
+    id: 'families',
+    icon: 'users',
+    value: '1 Lakh+',
+    title: 'FAMILIES REACHED',
+    subtitle: 'Through sustained field support and welfare programs.',
+  },
+  {
+    id: 'recognition',
+    icon: 'award',
+    value: 'Community Choice',
+    title: 'TRUSTED LOCALLY',
+    subtitle: 'Recognized by beneficiaries and partners for consistent impact.',
+  },
+  {
+    id: 'touchpoints',
+    icon: 'briefcase',
+    value: '25,000+',
+    title: 'COMMUNITY TOUCHPOINTS',
+    subtitle: 'Camp interactions, outreach drives, and on-ground engagements.',
+  },
+  {
+    id: 'rating',
+    icon: 'star',
+    value: '4.5+',
+    title: 'PUBLIC RATING',
+    subtitle: 'Across supporters, volunteers, and program participants.',
+  },
+];
+
 
 export const aimAndMission = {
   aimTitle: 'Our Aim',
