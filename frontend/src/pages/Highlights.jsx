@@ -51,52 +51,52 @@ const Highlights = () => {
     let isValid = true;
 
     if (!form.name.trim()) {
-      errors.name = 'Name is required.';
+      errors.name = 'Required';
       isValid = false;
     }
     if (!form.email || !/\S+@\S+\.\S+/.test(form.email)) {
-      errors.email = 'Valid email is required.';
+      errors.email = 'Valid email required';
       isValid = false;
     }
     if (!form.adhar || form.adhar.length !== 12) {
-      errors.adhar = 'Aadhar must be 12 digits.';
+      errors.adhar = '12 digits required';
       isValid = false;
     }
 
     if (formType === 'donor') {
       if (!form.amount || Number(form.amount) <= 0) {
-        errors.amount = 'Donation amount must be more than 0.';
+        errors.amount = 'Must be > 0';
         isValid = false;
       }
       if (!form.address.trim()) {
-        errors.address = 'Address is required.';
+        errors.address = 'Required';
         isValid = false;
       }
     }
 
     if (formType === 'member') {
       if (!form.occupation.trim()) {
-        errors.occupation = 'Occupation is required.';
+        errors.occupation = 'Required';
         isValid = false;
       }
       if (!form.street.trim()) {
-        errors.street = 'Street is required.';
+        errors.street = 'Required';
         isValid = false;
       }
       if (!form.city.trim()) {
-        errors.city = 'City is required.';
+        errors.city = 'Required';
         isValid = false;
       }
       if (!form.state.trim()) {
-        errors.state = 'State is required.';
+        errors.state = 'Required';
         isValid = false;
       }
       if (!form.pincode || form.pincode.length !== 6) {
-        errors.pincode = 'Pincode must be 6 digits.';
+        errors.pincode = '6 digits';
         isValid = false;
       }
       if (!form.gender.trim()) {
-        errors.gender = 'Gender is required.';
+        errors.gender = 'Required';
         isValid = false;
       }
     }
@@ -175,7 +175,7 @@ const Highlights = () => {
           gender: form.gender || '',
         },
         theme: {
-          color: '#225ca3',
+          color: '#1a1a1a',
         },
       };
 
@@ -213,7 +213,6 @@ const Highlights = () => {
 
     try {
       const receiptElement = receiptRef.current;
-
       const canvas = await html2canvas(receiptElement, {
         scale: Math.max(window.devicePixelRatio || 1, 2),
         useCORS: true,
@@ -221,7 +220,6 @@ const Highlights = () => {
         backgroundColor: '#ffffff',
         logging: false,
         onclone: clonedDocument => {
-          // Hide download button in PDF
           const clonedEl = clonedDocument.getElementById('aviyukt-receipt');
           if (clonedEl) {
             const btn = clonedEl.querySelector('#receipt-download-btn');
@@ -272,523 +270,331 @@ const Highlights = () => {
     : [];
 
   return (
-    <div className="bg-gray-50 font-sans min-h-screen">
-      {/* Hero */}
-      <div className="relative w-full min-h-[60vh] text-white text-center flex flex-col justify-center items-center">
-        <div className="absolute inset-0 bg-[url('https://res.cloudinary.com/dyvccryuz/image/upload/v1746259324/about_tayim0.jpg')] bg-cover bg-center" />
-        <div className="absolute inset-0 bg-black/60" />
-        <div className="relative z-10 p-6">
-          <h1 className="text-5xl font-serif mb-5">Donate Us</h1>
-          <p className="text-lg w-[50%] text-center mx-auto">
-            Your small contribution can bring a big change. Support our cause and help transform
-            lives through kindness, education, and hope. Every donation counts. Together, we make a
-            difference.
-          </p>
+    <div className="font-sans min-h-screen flex flex-col relative w-full bg-black">
+      {/* Immersive Background Image */}
+      <img
+        src="https://images.unsplash.com/photo-1593113563332-ceecb38b1d24?q=80&w=2670&auto=format&fit=crop"
+        alt="Background"
+        className="fixed inset-0 w-full h-full object-cover filter brightness-[0.4]"
+      />
+      
+      {/* Main Container */}
+      <div className="relative z-10 w-full min-h-screen flex flex-col pt-28 pb-16 px-4 items-center justify-start">
+        
+        {/* Toggle Form Type */}
+        <div className="flex gap-4 mb-10 w-full max-w-sm">
+          <button
+            className={`flex-1 py-3 border border-white/20 uppercase tracking-widest text-xs font-bold transition-all duration-300 backdrop-blur-md rounded-none ${
+              formType === 'donor' ? 'bg-[#f4efe4] text-black' : 'bg-transparent text-white/80 hover:bg-white/10'
+            }`}
+            onClick={() => toggleForm('donor')}
+          >
+            Donation
+          </button>
+          <button
+            className={`flex-1 py-3 border border-white/20 uppercase tracking-widest text-xs font-bold transition-all duration-300 backdrop-blur-md rounded-none ${
+              formType === 'member' ? 'bg-[#f4efe4] text-black' : 'bg-transparent text-white/80 hover:bg-white/10'
+            }`}
+            onClick={() => toggleForm('member')}
+          >
+            Membership
+          </button>
+        </div>
+
+        {/* Vintage Scalloped Card */}
+        <div className="relative w-full max-w-2xl bg-[#f4efe4] rounded-sm shadow-2xl p-8 md:p-14 text-[#2b2b29] mt-6">
+          
+          {/* Custom SVG Scalloped Top Edge */}
+          <div className="absolute left-0 right-0 -top-[14px] h-[15px] overflow-hidden">
+            <div 
+              className="w-full h-[15px]" 
+              style={{
+                backgroundImage: 'radial-gradient(15px 15px at 15px 15px, transparent 15px, #f4efe4 15px)',
+                backgroundSize: '30px 15px',
+                backgroundPosition: '-15px 0px'
+              }}
+            />
+          </div>
+
+          <h2 className="text-3xl md:text-5xl font-serif font-black uppercase text-center tracking-tight mb-10">
+            {formType === 'donor' ? 'Make a Donation' : 'Become a Member'}
+          </h2>
+
+          {!paymentClip ? (
+            <form onSubmit={handleSubmit} className="space-y-8">
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-8">
+                {/* Name */}
+                <div className="relative flex flex-col">
+                  <label className="font-serif font-bold text-sm mb-1 uppercase tracking-wide">Full Name</label>
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Enter your name"
+                    value={form.name}
+                    onChange={handleChange}
+                    className="w-full bg-transparent border-0 border-b-2 border-gray-300/60 outline-none px-0 py-2 focus:ring-0 focus:border-[#2b2b29] transition-colors placeholder:text-gray-400 font-sans text-sm"
+                  />
+                  {formErrors.name && <p className="absolute -bottom-5 text-red-600 text-xs">{formErrors.name}</p>}
+                </div>
+
+                {/* Email */}
+                <div className="relative flex flex-col">
+                  <label className="font-serif font-bold text-sm mb-1 uppercase tracking-wide">Email</label>
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="adresse@email.com"
+                    value={form.email}
+                    onChange={handleChange}
+                    className="w-full bg-transparent border-0 border-b-2 border-gray-300/60 outline-none px-0 py-2 focus:ring-0 focus:border-[#2b2b29] transition-colors placeholder:text-gray-400 font-sans text-sm"
+                  />
+                  {formErrors.email && <p className="absolute -bottom-5 text-red-600 text-xs">{formErrors.email}</p>}
+                </div>
+
+                {/* Aadhar */}
+                <div className="relative flex flex-col">
+                  <label className="font-serif font-bold text-sm mb-1 uppercase tracking-wide">Aadhar Number</label>
+                  <input
+                    type="text"
+                    name="adhar"
+                    placeholder="12 digit aadhar"
+                    maxLength={12}
+                    value={form.adhar}
+                    onChange={handleChange}
+                    className="w-full bg-transparent border-0 border-b-2 border-gray-300/60 outline-none px-0 py-2 focus:ring-0 focus:border-[#2b2b29] transition-colors placeholder:text-gray-400 font-sans text-sm"
+                  />
+                  {formErrors.adhar && <p className="absolute -bottom-5 text-red-600 text-xs">{formErrors.adhar}</p>}
+                </div>
+
+                {formType === 'donor' && (
+                  <div className="relative flex flex-col">
+                    <label className="font-serif font-bold text-sm mb-1 uppercase tracking-wide">Donation Amount</label>
+                    <input
+                      type="number"
+                      name="amount"
+                      placeholder="Amount in INR"
+                      value={form.amount}
+                      onChange={handleChange}
+                      className="w-full bg-transparent border-0 border-b-2 border-gray-300/60 outline-none px-0 py-2 focus:ring-0 focus:border-[#2b2b29] transition-colors placeholder:text-gray-400 font-sans text-sm"
+                    />
+                    {formErrors.amount && <p className="absolute -bottom-5 text-red-600 text-xs">{formErrors.amount}</p>}
+                  </div>
+                )}
+
+                {formType === 'member' && (
+                  <>
+                    <div className="relative flex flex-col">
+                      <label className="font-serif font-bold text-sm mb-1 uppercase tracking-wide">Gender</label>
+                      <select
+                        name="gender"
+                        value={form.gender}
+                        onChange={handleChange}
+                        className="w-full bg-transparent border-0 border-b-2 border-gray-300/60 outline-none px-0 py-2 focus:ring-0 focus:border-[#2b2b29] transition-colors text-gray-700 font-sans text-sm"
+                      >
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                      </select>
+                      {formErrors.gender && <p className="absolute -bottom-5 text-red-600 text-xs">{formErrors.gender}</p>}
+                    </div>
+                    <div className="relative flex flex-col mt-4 sm:mt-0">
+                      <label className="font-serif font-bold text-sm mb-1 uppercase tracking-wide">Occupation</label>
+                      <input
+                        type="text"
+                        name="occupation"
+                        placeholder="Your profession"
+                        value={form.occupation}
+                        onChange={handleChange}
+                        className="w-full bg-transparent border-0 border-b-2 border-gray-300/60 outline-none px-0 py-2 focus:ring-0 focus:border-[#2b2b29] transition-colors placeholder:text-gray-400 font-sans text-sm"
+                      />
+                      {formErrors.occupation && <p className="absolute -bottom-5 text-red-600 text-xs">{formErrors.occupation}</p>}
+                    </div>
+                  </>
+                )}
+              </div>
+
+              {/* Full Width Address Field(s) */}
+              {formType === 'donor' && (
+                <div className="relative flex flex-col mt-4">
+                  <label className="font-serif font-bold text-sm mb-1 uppercase tracking-wide">Full Address</label>
+                  <textarea
+                    name="address"
+                    placeholder="Complete address details"
+                    value={form.address}
+                    onChange={handleChange}
+                    rows="2"
+                    className="w-full bg-transparent border-0 border-b-2 border-gray-300/60 outline-none px-0 py-2 focus:ring-0 focus:border-[#2b2b29] transition-colors placeholder:text-gray-400 font-sans text-sm resize-none"
+                  />
+                  {formErrors.address && <p className="absolute -bottom-5 text-red-600 text-xs">{formErrors.address}</p>}
+                </div>
+              )}
+
+              {formType === 'member' && (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-8 mt-4">
+                  <div className="relative flex flex-col">
+                    <label className="font-serif font-bold text-sm mb-1 uppercase tracking-wide">Street</label>
+                    <input
+                      type="text"
+                      name="street"
+                      placeholder="Street name"
+                      value={form.street}
+                      onChange={handleChange}
+                      className="w-full bg-transparent border-0 border-b-2 border-gray-300/60 outline-none px-0 py-2 focus:ring-0 focus:border-[#2b2b29] transition-colors placeholder:text-gray-400 font-sans text-sm"
+                    />
+                    {formErrors.street && <p className="absolute -bottom-5 text-red-600 text-xs">{formErrors.street}</p>}
+                  </div>
+                  <div className="relative flex flex-col">
+                    <label className="font-serif font-bold text-sm mb-1 uppercase tracking-wide">City</label>
+                    <input
+                      type="text"
+                      name="city"
+                      placeholder="City"
+                      value={form.city}
+                      onChange={handleChange}
+                      className="w-full bg-transparent border-0 border-b-2 border-gray-300/60 outline-none px-0 py-2 focus:ring-0 focus:border-[#2b2b29] transition-colors placeholder:text-gray-400 font-sans text-sm"
+                    />
+                    {formErrors.city && <p className="absolute -bottom-5 text-red-600 text-xs">{formErrors.city}</p>}
+                  </div>
+                  <div className="relative flex flex-col">
+                    <label className="font-serif font-bold text-sm mb-1 uppercase tracking-wide">State</label>
+                    <input
+                      type="text"
+                      name="state"
+                      placeholder="State"
+                      value={form.state}
+                      onChange={handleChange}
+                      className="w-full bg-transparent border-0 border-b-2 border-gray-300/60 outline-none px-0 py-2 focus:ring-0 focus:border-[#2b2b29] transition-colors placeholder:text-gray-400 font-sans text-sm"
+                    />
+                    {formErrors.state && <p className="absolute -bottom-5 text-red-600 text-xs">{formErrors.state}</p>}
+                  </div>
+                  <div className="relative flex flex-col">
+                    <label className="font-serif font-bold text-sm mb-1 uppercase tracking-wide">Pincode</label>
+                    <input
+                      type="text"
+                      name="pincode"
+                      placeholder="6 digit pincode"
+                      maxLength={6}
+                      value={form.pincode}
+                      onChange={handleChange}
+                      className="w-full bg-transparent border-0 border-b-2 border-gray-300/60 outline-none px-0 py-2 focus:ring-0 focus:border-[#2b2b29] transition-colors placeholder:text-gray-400 font-sans text-sm"
+                    />
+                    {formErrors.pincode && <p className="absolute -bottom-5 text-red-600 text-xs">{formErrors.pincode}</p>}
+                  </div>
+                </div>
+              )}
+
+              <div className="pt-8">
+                <button
+                  type="submit"
+                  className="w-full border-2 border-[#2b2b29] bg-transparent text-[#2b2b29] hover:bg-[#2b2b29] hover:text-[#f4efe4] font-bold uppercase tracking-widest py-4 transition-all duration-300 text-sm"
+                >
+                  Confirm & Pay Now
+                </button>
+              </div>
+
+              {paymentMessage.text && (
+                <p
+                  className={`mt-6 p-4 rounded text-sm text-center font-bold font-sans ${
+                    paymentMessage.type === 'success'
+                      ? 'bg-green-100 text-green-900'
+                      : 'bg-red-100 text-red-900'
+                  }`}
+                >
+                  {paymentMessage.text}
+                </p>
+              )}
+            </form>
+          ) : (
+            <div className="flex flex-col items-center">
+              {/* Receipt Output Component */}
+              <div
+                id="aviyukt-receipt"
+                ref={receiptRef}
+                style={{ backgroundColor: '#ffffff', color: '#1a1a2e' }}
+                className="w-full border border-gray-200 mt-4 rounded-md shadow-lg"
+              >
+                <div style={{ height: '6px', backgroundColor: '#2b2b29', borderRadius: '6px 6px 0 0' }} />
+                <div style={{ padding: '24px 32px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
+                    <div style={{ textAlign: 'left' }}>
+                      <p style={{ fontSize: '18px', fontWeight: '700', color: '#2b2b29', margin: 0, fontFamily: 'Georgia, serif' }}>
+                        AVIYUKT NGO
+                      </p>
+                      <p style={{ fontSize: '11px', color: '#94a3b8', margin: '3px 0 0', fontFamily: 'sans-serif' }}>
+                        Empowering Lives, Spreading Hope
+                      </p>
+                    </div>
+                  </div>
+
+                  <div style={{ backgroundColor: '#2b2b29', borderRadius: '4px', padding: '8px 16px', marginBottom: '20px', textAlign: 'center' }}>
+                    <p style={{ color: '#ffffff', fontSize: '12px', fontWeight: '700', letterSpacing: '1px', margin: 0 }}>
+                      {formType === 'donor' ? 'DONATION RECEIPT' : 'MEMBERSHIP CERTIFICATE'}
+                    </p>
+                  </div>
+
+                  <div style={{ border: '1px solid #e2e8f0', borderRadius: '8px', overflow: 'hidden', marginBottom: '16px' }}>
+                    {receiptRows.map((row, i) => (
+                      <div key={i} style={{ display: 'flex', borderBottom: i < receiptRows.length - 1 ? '1px solid #f1f5f9' : 'none', backgroundColor: '#ffffff' }}>
+                        <div style={{ width: '40%', padding: '9px 14px', fontSize: '12px', color: '#64748b', fontWeight: 'bold' }}>{row.label}</div>
+                        <div style={{ width: '60%', padding: '9px 14px', fontSize: '12px', color: '#1e293b', wordBreak: 'break-all' }}>{row.value}</div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div style={{ backgroundColor: '#fafafa', border: '1px solid #e5e5e5', borderRadius: '8px', padding: '14px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                    <p style={{ margin: 0, fontSize: '13px', color: '#555', fontWeight: 'bold' }}>Amount</p>
+                    <p style={{ margin: 0, fontSize: '20px', fontWeight: '700', color: '#2b2b29' }}>₹{paymentClip.amount}</p>
+                  </div>
+
+                  <p style={{ textAlign: 'center', fontSize: '10px', color: '#94a3b8', margin: 0, lineHeight: '1.6' }}>
+                    This receipt is valid for tax deduction under Section 80G.<br />Thank you for your generous support.
+                  </p>
+                </div>
+              </div>
+
+              <button
+                id="receipt-download-btn"
+                onClick={handleDownloadReceipt}
+                disabled={isDownloadingReceipt}
+                className={`mt-10 bg-[#2b2b29] text-[#f4efe4] px-8 py-3 uppercase tracking-widest text-sm font-bold shadow transition ${
+                  isDownloadingReceipt ? 'opacity-70 cursor-not-allowed' : 'hover:bg-black'
+                }`}
+              >
+                {isDownloadingReceipt ? 'Preparing PDF...' : 'Download Receipt'}
+              </button>
+            </div>
+          )}
         </div>
       </div>
 
-      {/* Toggle */}
-      <div className="flex justify-center gap-4 mt-10">
-        <button
-          className={`px-6 py-2 rounded ${
-            formType === 'donor' ? 'bg-[#335288] text-white' : 'bg-gray-200'
-          }`}
-          onClick={() => toggleForm('donor')}
-        >
-          Donate
-        </button>
-        <button
-          className={`px-6 py-2 rounded ${
-            formType === 'member' ? 'bg-[#335288] text-white' : 'bg-gray-200'
-          }`}
-          onClick={() => toggleForm('member')}
-        >
-          Become a Member
-        </button>
-      </div>
-
-      {/* Form */}
-      <div className="max-w-lg mx-auto py-8 mt-8 mb-[10vh] bg-white p-6 rounded shadow">
-        <h2 className="text-xl font-serif mb-6 text-center text-[#335288]">
-          {formType === 'donor' ? 'Donation Form' : 'Membership Form'}
-        </h2>
-
-        {!paymentClip ? (
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <input
-              type="text"
-              name="name"
-              placeholder="Full Name"
-              value={form.name}
-              onChange={handleChange}
-              className="w-full border border-zinc-400 outline-none px-3 py-2 rounded"
-            />
-            {formErrors.name && <p className="text-red-500 text-sm">{formErrors.name}</p>}
-
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={form.email}
-              onChange={handleChange}
-              className="w-full border border-zinc-400 outline-none px-3 py-2 rounded"
-            />
-            {formErrors.email && <p className="text-red-500 text-sm">{formErrors.email}</p>}
-
-            <input
-              type="text"
-              name="adhar"
-              placeholder="Aadhar Number"
-              maxLength={12}
-              value={form.adhar}
-              onChange={handleChange}
-              className="w-full border border-zinc-400 outline-none px-3 py-2 rounded"
-            />
-            {formErrors.adhar && <p className="text-red-500 text-sm">{formErrors.adhar}</p>}
-
-            {formType === 'member' && (
-              <>
-                <input
-                  type="text"
-                  name="occupation"
-                  placeholder="Occupation"
-                  value={form.occupation}
-                  onChange={handleChange}
-                  className="w-full border border-zinc-400 outline-none px-3 py-2 rounded"
-                />
-                {formErrors.occupation && (
-                  <p className="text-red-500 text-sm">{formErrors.occupation}</p>
-                )}
-
-                <select
-                  name="gender"
-                  value={form.gender}
-                  onChange={handleChange}
-                  className="w-full border border-zinc-400 outline-none px-3 py-2 rounded"
-                >
-                  <option value="">Select Gender</option>
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                  <option value="Other">Other</option>
-                </select>
-                {formErrors.gender && <p className="text-red-500 text-sm">{formErrors.gender}</p>}
-
-                <input
-                  type="text"
-                  name="street"
-                  placeholder="Street"
-                  value={form.street}
-                  onChange={handleChange}
-                  className="w-full border border-zinc-400 outline-none px-3 py-2 rounded"
-                />
-                {formErrors.street && <p className="text-red-500 text-sm">{formErrors.street}</p>}
-
-                <input
-                  type="text"
-                  name="city"
-                  placeholder="City"
-                  value={form.city}
-                  onChange={handleChange}
-                  className="w-full border border-zinc-400 outline-none px-3 py-2 rounded"
-                />
-                {formErrors.city && <p className="text-red-500 text-sm">{formErrors.city}</p>}
-
-                <input
-                  type="text"
-                  name="state"
-                  placeholder="State"
-                  value={form.state}
-                  onChange={handleChange}
-                  className="w-full border border-zinc-400 outline-none px-3 py-2 rounded"
-                />
-                {formErrors.state && <p className="text-red-500 text-sm">{formErrors.state}</p>}
-
-                <input
-                  type="text"
-                  name="pincode"
-                  placeholder="Pincode"
-                  value={form.pincode}
-                  maxLength={6}
-                  onChange={handleChange}
-                  className="w-full border border-zinc-400 outline-none px-3 py-2 rounded"
-                />
-                {formErrors.pincode && <p className="text-red-500 text-sm">{formErrors.pincode}</p>}
-              </>
-            )}
-
-            {formType === 'donor' && (
-              <textarea
-                name="address"
-                placeholder="Full Address"
-                value={form.address}
-                onChange={handleChange}
-                className="w-full border border-zinc-400 outline-none px-3 py-2 rounded"
-              />
-            )}
-            {formType === 'donor' && formErrors.address && (
-              <p className="text-red-500 text-sm">{formErrors.address}</p>
-            )}
-
-            {formType === 'donor' && (
-              <>
-                <input
-                  type="number"
-                  name="amount"
-                  placeholder="Donation Amount"
-                  value={form.amount}
-                  onChange={handleChange}
-                  className="w-full border border-zinc-400 outline-none px-3 py-2 rounded"
-                />
-                {formErrors.amount && <p className="text-red-500 text-sm">{formErrors.amount}</p>}
-              </>
-            )}
-
-            <button
-              type="submit"
-              className="w-full bg-[#335288] hover:bg-transparent hover:text-[#335288] border border-[#335288] text-white font-semibold py-2 rounded"
-            >
-              Pay Now
-            </button>
-          </form>
-        ) : (
-          <>
-            {/* ── Receipt (captured by html2canvas) ── */}
-            <div
-              id="aviyukt-receipt"
-              ref={receiptRef}
-              style={{ fontFamily: 'Georgia, serif', backgroundColor: '#ffffff', color: '#1a1a2e' }}
-              className="max-w-xl mx-auto"
-            >
-              {/* Top accent bar */}
-              <div
-                style={{ height: '6px', backgroundColor: '#335288', borderRadius: '6px 6px 0 0' }}
-              />
-
-              <div style={{ padding: '24px 32px' }}>
-                {/* Header: logo + org name */}
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    marginBottom: '20px',
-                  }}
-                >
-                  <SkeletonImage
-                    src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746258864/My%20Brand/logo_jo4h7x.png"
-                    alt="Aviyukt Logo"
-                    crossOrigin="anonymous"
-                    style={{ width: '60px', height: '60px', objectFit: 'contain' }}
-                  />
-                  <div style={{ textAlign: 'right' }}>
-                    <p
-                      style={{
-                        fontSize: '18px',
-                        fontWeight: '700',
-                        color: '#335288',
-                        margin: 0,
-                        fontFamily: 'Georgia, serif',
-                      }}
-                    >
-                      AVIYUKT NGO
-                    </p>
-                    <p
-                      style={{
-                        fontSize: '11px',
-                        color: '#94a3b8',
-                        margin: '3px 0 0',
-                        fontFamily: 'sans-serif',
-                      }}
-                    >
-                      Empowering Lives, Spreading Hope
-                    </p>
-                  </div>
-                </div>
-
-                {/* Title band */}
-                <div
-                  style={{
-                    backgroundColor: '#335288',
-                    borderRadius: '6px',
-                    padding: '8px 16px',
-                    marginBottom: '20px',
-                    textAlign: 'center',
-                  }}
-                >
-                  <p
-                    style={{
-                      color: '#ffffff',
-                      fontSize: '13px',
-                      fontWeight: '700',
-                      letterSpacing: '1.5px',
-                      margin: 0,
-                      fontFamily: 'sans-serif',
-                    }}
-                  >
-                    {formType === 'donor' ? 'DONATION RECEIPT' : 'MEMBERSHIP CERTIFICATE'}
-                  </p>
-                </div>
-
-                {/* Success badge */}
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '8px',
-                    marginBottom: '20px',
-                  }}
-                >
-                  <div
-                    style={{
-                      width: '26px',
-                      height: '26px',
-                      borderRadius: '50%',
-                      backgroundColor: '#d1fae5',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      flexShrink: 0,
-                    }}
-                  >
-                    <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
-                      <path
-                        d="M2 7l3.5 3.5L12 3.5"
-                        stroke="#065f46"
-                        strokeWidth="2.2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </div>
-                  <p
-                    style={{
-                      color: '#065f46',
-                      fontWeight: '600',
-                      fontSize: '13px',
-                      margin: 0,
-                      fontFamily: 'sans-serif',
-                    }}
-                  >
-                    Payment Successful
-                  </p>
-                </div>
-
-                {/* Details table */}
-                <div
-                  style={{
-                    border: '1px solid #e2e8f0',
-                    borderRadius: '8px',
-                    overflow: 'hidden',
-                    marginBottom: '16px',
-                  }}
-                >
-                  {receiptRows.map((row, i) => (
-                    <div
-                      key={i}
-                      style={{
-                        display: 'flex',
-                        borderBottom: i < receiptRows.length - 1 ? '1px solid #f1f5f9' : 'none',
-                        backgroundColor: i % 2 === 0 ? '#f8fafc' : '#ffffff',
-                      }}
-                    >
-                      <div
-                        style={{
-                          width: '38%',
-                          padding: '9px 14px',
-                          fontSize: '12px',
-                          color: '#64748b',
-                          fontFamily: 'sans-serif',
-                          flexShrink: 0,
-                        }}
-                      >
-                        {row.label}
-                      </div>
-                      <div
-                        style={{
-                          width: '62%',
-                          padding: '9px 14px',
-                          fontSize: '12px',
-                          color: '#1e293b',
-                          fontFamily: 'sans-serif',
-                          fontWeight: '600',
-                          wordBreak: 'break-all',
-                        }}
-                      >
-                        {row.value}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Amount highlight */}
-                <div
-                  style={{
-                    backgroundColor: '#eff6ff',
-                    border: '1px solid #bfdbfe',
-                    borderRadius: '8px',
-                    padding: '14px 20px',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    marginBottom: '16px',
-                  }}
-                >
-                  <p
-                    style={{
-                      margin: 0,
-                      fontSize: '13px',
-                      color: '#1e40af',
-                      fontFamily: 'sans-serif',
-                    }}
-                  >
-                    {formType === 'donor' ? 'Donation Amount' : 'Membership Fee'}
-                  </p>
-                  <p
-                    style={{
-                      margin: 0,
-                      fontSize: '22px',
-                      fontWeight: '700',
-                      color: '#1d4ed8',
-                      fontFamily: 'sans-serif',
-                    }}
-                  >
-                    ₹{paymentClip.amount}
-                  </p>
-                </div>
-
-                {/* Tax registration numbers */}
-                <div
-                  style={{
-                    borderTop: '1px dashed #cbd5e1',
-                    paddingTop: '12px',
-                    marginBottom: '16px',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <div>
-                    <p
-                      style={{
-                        margin: '0 0 3px',
-                        fontSize: '10px',
-                        color: '#94a3b8',
-                        fontFamily: 'sans-serif',
-                      }}
-                    >
-                      12AB Registration
-                    </p>
-                    <p
-                      style={{
-                        margin: 0,
-                        fontSize: '12px',
-                        fontWeight: '600',
-                        color: '#334155',
-                        fontFamily: 'sans-serif',
-                      }}
-                    >
-                      AAPAA3852N23BP01
-                    </p>
-                  </div>
-                  <div style={{ textAlign: 'right' }}>
-                    <p
-                      style={{
-                        margin: '0 0 3px',
-                        fontSize: '10px',
-                        color: '#94a3b8',
-                        fontFamily: 'sans-serif',
-                      }}
-                    >
-                      80G Registration
-                    </p>
-                    <p
-                      style={{
-                        margin: 0,
-                        fontSize: '12px',
-                        fontWeight: '600',
-                        color: '#334155',
-                        fontFamily: 'sans-serif',
-                      }}
-                    >
-                      AAPAA3852N23BP02
-                    </p>
-                  </div>
-                </div>
-
-                {/* Footer note */}
-                <p
-                  style={{
-                    textAlign: 'center',
-                    fontSize: '10px',
-                    color: '#94a3b8',
-                    fontFamily: 'sans-serif',
-                    margin: 0,
-                    lineHeight: '1.6',
-                  }}
-                >
-                  This receipt is computer-generated and valid for tax deduction under Section 80G.
-                  <br />
-                  Thank you for your generous support — Aviyukt NGO.
-                </p>
-              </div>
-
-              {/* Bottom accent bar */}
-              <div
-                style={{ height: '4px', backgroundColor: '#5b8dee', borderRadius: '0 0 6px 6px' }}
-              />
-
-              {/* Download button — hidden in PDF via onclone */}
-              <div
-                id="receipt-download-btn"
-                style={{ display: 'flex', justifyContent: 'center', padding: '20px 0 4px' }}
-              >
-                <button
-                  onClick={handleDownloadReceipt}
-                  disabled={isDownloadingReceipt}
-                  className={`bg-[#335288] text-white px-6 py-2 rounded-md text-sm font-medium shadow transition ${
-                    isDownloadingReceipt ? 'opacity-70 cursor-not-allowed' : 'hover:bg-blue-500'
-                  }`}
-                >
-                  {isDownloadingReceipt ? 'Preparing PDF...' : 'Download Receipt'}
-                </button>
-              </div>
-            </div>
-          </>
-        )}
-
-        {paymentMessage.text && (
-          <p
-            className={`mt-4 p-2 rounded text-sm ${
-              paymentMessage.type === 'success'
-                ? 'bg-green-200 text-green-800'
-                : 'bg-red-200 text-red-800'
-            }`}
-          >
-            {paymentMessage.text}
-          </p>
-        )}
-      </div>
-
-      {/* FAQ Section */}
-      <div className="py-12 px-4 sm:px-10 md:px-20 bg-white">
-        <h2 className="text-3xl font-serif text-center text-[#335288] mb-8">
+      {/* FAQ Section underneath full screen layout */}
+      <div className="relative z-10 w-full py-20 px-4 sm:px-10 md:px-20 bg-white">
+        <h2 className="text-3xl font-serif text-center text-[#2b2b29] mb-12 uppercase tracking-wide">
           Frequently Asked Questions
         </h2>
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-3xl mx-auto space-y-2">
           {faqs.map((faq, index) => (
-            <div key={index} className="border-b border-gray-200 py-4">
+            <div key={index} className="border-b border-gray-200 py-6">
               <button
-                className="w-full flex justify-between items-center text-left text-lg font-medium text-[#335288] focus:outline-none"
+                className="w-full flex justify-between items-center text-left text-lg font-serif font-bold text-[#2b2b29] focus:outline-none"
                 onClick={() => setOpenFAQ(openFAQ === index ? null : index)}
               >
                 {faq.question}
                 <ChevronDownIcon
-                  className={`h-5 w-5 transform transition-transform duration-300 ${
-                    openFAQ === index ? 'rotate-180' : 'rotate-0'
+                  className={`h-6 w-6 transform transition-transform duration-300 ${
+                    openFAQ === index ? 'rotate-180 text-gray-500' : 'rotate-0 text-black'
                   }`}
                 />
               </button>
-              {openFAQ === index && <p className="mt-2 text-gray-600">{faq.answer}</p>}
+              <div 
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                  openFAQ === index ? 'max-h-40 opacity-100 mt-4' : 'max-h-0 opacity-0'
+                }`}
+              >
+                <p className="text-gray-600 font-sans text-md leading-relaxed">{faq.answer}</p>
+              </div>
             </div>
           ))}
         </div>
@@ -798,4 +604,3 @@ const Highlights = () => {
 };
 
 export default Highlights;
-

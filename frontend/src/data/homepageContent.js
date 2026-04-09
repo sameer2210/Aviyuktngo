@@ -15,7 +15,7 @@ import {
 export const heroSlides = [
   {
     image:
-      'https://images.unsplash.com/photo-1758390286700-06f93fddec45?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://res.cloudinary.com/dc2geexnf/image/upload/v1775721910/WhatsApp_Image3_2026-04-09_at_11.12.19_AM_wmhsdo.jpg',
     eyebrow: 'Aviyukt Samaj Sevi Sansthan',
     title: 'Serving people with dignity, empathy, and action.',
     text: 'A community-led NGO building opportunity across education, health, livelihood, and social justice.',
@@ -29,7 +29,7 @@ export const heroSlides = [
   },
   {
     image:
-      'https://res.cloudinary.com/dc2geexnf/image/upload/v1775721909/WhatsApp_Image4_2026-04-09_at_11.12.19_AM_pimc2f.jpg',
+      'https://plus.unsplash.com/premium_photo-1718570261870-135da5fc3ec7?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     eyebrow: 'People First',
     title: 'Collective effort that turns concern into change.',
     text: 'Our volunteers, field teams, and local stakeholders deliver focused interventions that improve everyday lives.',

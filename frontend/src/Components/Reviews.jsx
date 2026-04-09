@@ -1,8 +1,10 @@
-// Reviews.jsx
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import SkeletonImage from "./SkeletonImage";
+import React, { useRef } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import SkeletonImage from './SkeletonImage';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const reviews = [
   {
@@ -17,7 +19,7 @@ const reviews = [
     message: "Proud to be a supporter. Aviyukt's transparency is remarkable.",
     img: 'https://res.cloudinary.com/dyvccryuz/image/upload/v1746259324/nandu_lfx39s.png',
   },
-    {
+  {
     name: 'Ankesh',
     role: 'Beneficiary',
     message: 'Our lives changed because Aviyukt believed in us.',
@@ -29,7 +31,6 @@ const reviews = [
     message: 'Joining Aviyukt was the best decision — it feels like family!',
     img: 'https://res.cloudinary.com/dc2geexnf/image/upload/v1775130745/1742237649179.jpg_c0lfze.jpg',
   },
-
   {
     name: 'Shukriti Shirvastava',
     role: 'Member',
@@ -39,56 +40,106 @@ const reviews = [
 ];
 
 const Reviews = () => {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 700,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    pauseOnHover: true,
-    responsive: [
+  const container = useRef();
+  const titleRef = useRef();
+
+  useGSAP(() => {
+    // Title Animation
+    gsap.fromTo(
+      titleRef.current,
+      { opacity: 0, y: 30 },
       {
-        breakpoint: 1024, // tablets
-        settings: {
-          slidesToShow: 2,
+        opacity: 1,
+        y: 0,
+        duration: 1.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: titleRef.current,
+          start: 'top 80%',
         },
-      },
+      }
+    );
+
+    // Staggered Card Animation (Scale and Fade)
+    const cards = gsap.utils.toArray('.review-card');
+    gsap.fromTo(
+      cards,
+      { opacity: 0, scale: 0.8, y: 50 },
       {
-        breakpoint: 640, // mobile
-        settings: {
-          slidesToShow: 1,
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: 1,
+        stagger: 0.15,
+        ease: 'back.out(1.2)',
+        scrollTrigger: {
+          trigger: container.current,
+          start: 'top 75%',
         },
-      },
-    ],
-  };
+      }
+    );
+  }, { scope: container });
 
   return (
-    <section className="w-full bg-gradient-to-br from-[#f0f4ff] to-[#ffffff] py-20 px-6 md:px-20">
-      <h2 className="text-xl md:text-2xl text-center text-[#335288] font-serif mb-12">
-        💬 Words From Our Community
-      </h2>
+    <section ref={container} className="w-full bg-[#fcfaf5] py-24 px-4 sm:px-10 lg:px-20 overflow-hidden border-t border-gray-200">
+      
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 lg:gap-20">
+        
+        {/* Left Intro Panel */}
+        <div ref={titleRef} className="md:w-1/3 flex flex-col justify-center">
+          <p className="uppercase tracking-[0.2em] text-xs font-bold text-gray-500 mb-4 border-l-2 border-black pl-3">
+            Community Sentiment
+          </p>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl text-black font-serif uppercase tracking-tighter mb-6 leading-[1.1]">
+            Words From Our People.
+          </h2>
+          <p className="text-gray-600 font-light text-lg leading-relaxed">
+            Witness the direct impact and hear the stories from our donors, members, and the beneficiaries whose lives have been transformed through Aviyukt NGO.
+          </p>
+        </div>
 
-      <Slider {...settings}>
-        {reviews.map((review, index) => (
-          <div key={index} className="px-4">
-            <div className="bg-white/80 backdrop-blur-md mb-6 rounded-2xl shadow-lg p-8 flex flex-col items-center text-center transition-all hover:scale-105 hover:shadow-2xl duration-500 min-h-[400px]">
-              <SkeletonImage
-                src={review.img}
-                alt={review.name}
-                className="w-20 h-20 rounded-full object-cover mb-6 border-4 border-[#335288]"
-              />
-              <h3 className="text-xl font-semibold text-[#335288] mb-1">{review.name}</h3>
-              <p className="text-sm italic text-gray-500 mb-4">{review.role}</p>
-              <p className="text-gray-700 leading-relaxed font-serif">{`"${review.message}"`}</p>
+        {/* Right Cards Grid */}
+        <div className="md:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {reviews.map((review, index) => (
+            <div 
+              key={index} 
+              className={`review-card relative bg-white border border-gray-100 p-8 shadow-sm hover:shadow-xl transition-shadow duration-500 flex flex-col justify-between ${
+                index % 2 === 1 ? 'sm:translate-y-8' : '' // Staggered layout visually
+              }`}
+            >
+              {/* Massive subtle quote mark in background */}
+              <div className="absolute top-4 right-4 text-8xl font-serif text-gray-100/60 select-none z-0">
+                &rdquo;
+              </div>
+
+              <div className="relative z-10 mb-8">
+                <p className="text-gray-900 leading-relaxed font-serif text-lg italic">
+                  "{review.message}"
+                </p>
+              </div>
+
+              <div className="relative z-10 flex items-center gap-4 pt-6 border-t border-gray-100">
+                <SkeletonImage
+                  src={review.img}
+                  alt={review.name}
+                  className="w-12 h-12 rounded-full object-cover grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                />
+                <div>
+                  <h3 className="text-[15px] font-bold text-gray-900 uppercase tracking-wide leading-none mb-1">
+                    {review.name}
+                  </h3>
+                  <p className="text-xs uppercase tracking-widest text-[#335288] font-bold">
+                    {review.role}
+                  </p>
+                </div>
+              </div>
             </div>
-          </div>
-        ))}
-      </Slider>
+          ))}
+        </div>
+      </div>
+
     </section>
   );
 };
 
 export default Reviews;
-

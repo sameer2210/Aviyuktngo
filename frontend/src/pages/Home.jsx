@@ -150,10 +150,10 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <HighlightsSlider />
       <TransparencySection />
       <TrustHighlightsSection />
       <CtaSection />
-      <HighlightsSlider />
       <HomeStaticSections />
 
       <div className="min-h-[50vh] w-full flex flex-col md:flex-row justify-center items-center ">
