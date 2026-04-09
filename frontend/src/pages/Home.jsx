@@ -61,56 +61,6 @@ const Home = () => {
     <>
       <HeroSection />
       <AimMissionSection />
-      <TransparencySection />
-      <CtaSection />
-      <HighlightsSlider />
-      <HomeStaticSections />
-
-      <div className="min-h-[50vh] w-full flex flex-col md:flex-row justify-center items-center bg-[#071243] mb-2">
-        {/* Text Side */}
-        <div className="w-full md:w-[50%] h-full flex flex-col justify-center px-[5vw] py-4">
-          <h1 className="text-3xl md:text-4xl text-white font-serif mb-4 md:text-left">
-            Our <span className="text-[#335288]">Dedicated Hands,</span>
-            <br /> Transforming Lives Together
-          </h1>
-          <p className="w-full md:w-full text-base md:text-lg text-white md:text-left">
-            Our volunteers are the heart of our mission, working tirelessly to uplift communities,
-            spread hope, and create lasting change through their compassion, dedication, and
-            selfless service every day.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center z-9">
-            <form onSubmit={handleSubmit}>
-              <div className="flex flex-wrap sm:flex-nowrap w-full">
-                <input
-                  type="email"
-                  name="email"
-                  className="h-12 flex-1 min-w-70 border border-zinc-500 outline-none sm:rounded-tl-xl px-2 bg-white"
-                  placeholder="Enter your email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-                <button
-                  type="submit"
-                  className="h-12 w-full sm:w-auto px-4 bg-[#335288] text-lg font-serif rounded-br-xl sm:rounded-bl-none text-white"
-                >
-                  Submit
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-
-        {/* Image Side */}
-        <div className="w-full md:w-[50%] h-full flex justify-center md:justify-end">
-          <SkeletonImage
-            className="h-[60vh] object-contain"
-            src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746259327/volunteer_a8negb.png"
-            alt=""
-          />
-        </div>
-      </div>
-
       {/* project section start */}
       <div className="hidden md:flex w-[90vw] mx-auto justify-between items-center gap-5 py-10">
         {/* Left big image */}
@@ -200,6 +150,56 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <TransparencySection />
+      <TrustHighlightsSection />
+      <CtaSection />
+      <HighlightsSlider />
+      <HomeStaticSections />
+
+      <div className="min-h-[50vh] w-full flex flex-col md:flex-row justify-center items-center ">
+        {/* Text Side */}
+        <div className="w-full md:w-[50%] h-full flex flex-col justify-center px-[5vw] py-4">
+          <h1 className="text-3xl md:text-4xl text-white font-serif mb-4 md:text-left">
+            Our <span className="text-[#335288]">Dedicated Hands,</span>
+            <br /> Transforming Lives Together
+          </h1>
+          <p className="w-full md:w-full text-base md:text-lg text-white md:text-left">
+            Our volunteers are the heart of our mission, working tirelessly to uplift communities,
+            spread hope, and create lasting change through their compassion, dedication, and
+            selfless service every day.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center z-9">
+            <form onSubmit={handleSubmit}>
+              <div className="flex flex-wrap sm:flex-nowrap w-full">
+                <input
+                  type="email"
+                  name="email"
+                  className="h-12 flex-1 min-w-70 border border-zinc-500 outline-none sm:rounded-tl-xl px-2 bg-white"
+                  placeholder="Enter your email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+                <button
+                  type="submit"
+                  className="h-12 w-full sm:w-auto px-4 bg-[#335288] text-lg font-serif rounded-br-xl sm:rounded-bl-none text-white"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        {/* Image Side */}
+        <div className="w-full md:w-[50%] h-full flex justify-center md:justify-end">
+          <SkeletonImage
+            className="h-[60vh] object-contain"
+            src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746259327/volunteer_a8negb.png"
+            alt=""
+          />
+        </div>
+      </div>
 
       {/* Revolution Section */}
       <div className="w-full py-12 px-6 md:px-16 bg-[#ebebeb] relative">
@@ -266,7 +266,6 @@ const Home = () => {
           Learn More
           <i className="fa-solid fa-arrow-right border-1 px-[13px] py-3 rounded-4xl transition-transform duration-300 group-hover:translate-x-2"></i>
         </Link>
-        <TrustHighlightsSection />
       </div>
     </>
   );

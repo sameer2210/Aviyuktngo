@@ -15,6 +15,7 @@ export const servicesData = [
     slug: 'agriculture',
     title: 'Agriculture',
     icon: Wheat,
+    image: 'https://images.unsplash.com/photo-1589923188900-85dae523342b?q=80&w=2670&auto=format&fit=crop',
     shortDescription:
       'Guidance and support for farmers, crop planning, and sustainable cultivation practices.',
     detailDescription:
@@ -36,6 +37,7 @@ export const servicesData = [
     slug: 'medicine',
     title: 'Medicine',
     icon: Pill,
+    image: 'https://images.unsplash.com/photo-1632733711679-529326f6db12?q=80&w=2670&auto=format&fit=crop',
     shortDescription:
       'Essential medicine support for low-income families and urgent patient assistance.',
     detailDescription:
@@ -57,6 +59,7 @@ export const servicesData = [
     slug: 'health',
     title: 'Health',
     icon: HeartPulse,
+    image: 'https://images.unsplash.com/photo-1596525164802-b2d9b68a865f?q=80&w=2670&auto=format&fit=crop',
     shortDescription:
       'Community health drives, preventive awareness, and wellness outreach programs.',
     detailDescription:
@@ -78,6 +81,7 @@ export const servicesData = [
     slug: 'placement',
     title: 'Placement',
     icon: BriefcaseBusiness,
+    image: 'https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2669&auto=format&fit=crop',
     shortDescription:
       'Employment readiness support including counseling, profile building, and job linkage.',
     detailDescription:
@@ -99,6 +103,7 @@ export const servicesData = [
     slug: 'education',
     title: 'Education',
     icon: GraduationCap,
+    image: 'https://images.unsplash.com/photo-1524069290683-0457abfe42c3?q=80&w=2670&auto=format&fit=crop',
     shortDescription:
       'Learning support for children and youth through mentoring, material support, and awareness.',
     detailDescription:
@@ -120,6 +125,7 @@ export const servicesData = [
     slug: 'rental-work',
     title: 'Rental Work',
     icon: Wrench,
+    image: 'https://images.unsplash.com/photo-1681283626243-7fbbdb6690c5?q=80&w=2671&auto=format&fit=crop',
     shortDescription:
       'Support and guidance for rental-related documentation and coordination work.',
     detailDescription:
@@ -141,6 +147,7 @@ export const servicesData = [
     slug: 'property',
     title: 'Property (Purchase, Loan, Registry, Mutation)',
     icon: Building2,
+    image: 'https://images.unsplash.com/photo-1618044733300-9472054094ee?q=80&w=2671&auto=format&fit=crop',
     shortDescription:
       'Assistance for property workflows including purchase support and documentation guidance.',
     detailDescription:
@@ -162,6 +169,7 @@ export const servicesData = [
     slug: 'insurance-legal-court-case-work',
     title: 'Insurance (Legal & Court Case Work)',
     icon: ShieldCheck,
+    image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=2712&auto=format&fit=crop',
     shortDescription:
       'Support for insurance processes with legal and court-case related guidance touchpoints.',
     detailDescription:
@@ -183,6 +191,7 @@ export const servicesData = [
     slug: 'household-services',
     title: 'Household Services',
     icon: House,
+    image: 'https://images.unsplash.com/photo-1616047006789-b7af5afb8c20?q=80&w=2500&auto=format&fit=crop',
     shortDescription:
       'Practical support for household needs through trusted community-driven service coordination.',
     detailDescription:
@@ -201,4 +210,3 @@ export const servicesData = [
       'Many families have resolved urgent household needs quickly through coordinated local support.',
   },
 ];
-
