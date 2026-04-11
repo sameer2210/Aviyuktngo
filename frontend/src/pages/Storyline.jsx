@@ -179,7 +179,7 @@ const Storyline = () => {
               src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746259325/President_uwnwyz.jpg"
               alt="President"
             />
-            <h2 className="text-xl font-serif mb-2">President</h2>
+            <h2 className="text-xl text-black font-serif mb-2">President</h2>
             <p className="text-lg text-[#335288] mb-3">Narayan Kumar Shrivastav</p>
             <hr className="h-[2px] bg-[#335288] w-[80%] mb-4" />
             <p className="text-sm text-center text-zinc-500">
@@ -195,7 +195,7 @@ const Storyline = () => {
               src="https://res.cloudinary.com/dc2geexnf/image/upload/v1775909805/Screenshot_2026-04-11_171835_gyj9c1.png"
               alt="Vice President"
             />
-            <h2 className="text-xl font-serif mb-2">Vice President</h2>
+            <h2 className="text-xl text-black font-serif mb-2">Vice President</h2>
             <p className="text-lg text-[#335288] mb-3">Vijay Kumar khare</p>
             <hr className="h-[2px] bg-[#335288] w-[80%] mb-4" />
             <p className="text-sm text-center text-zinc-500">
@@ -211,7 +211,7 @@ const Storyline = () => {
               src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746259323/BrajeshPratapSingh_yxnij7.jpg"
               alt="Secretary"
             />
-            <h2 className="text-xl font-serif mb-2">Secretary</h2>
+            <h2 className="text-xl text-black font-serif mb-2">Secretary</h2>
             <p className="text-lg text-[#335288] mb-3">Brajesh Pratap Singh</p>
             <hr className="h-[2px] bg-[#335288] w-[80%] mb-4" />
             <p className="text-sm text-center text-zinc-500">
@@ -226,7 +226,7 @@ const Storyline = () => {
               src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746259327/Shukrantishrivastava_vp5dmh.jpg"
               alt="Joint Secretary"
             />
-            <h2 className="text-xl font-serif mb-2">Joint Secretary</h2>
+            <h2 className="text-xl text-black font-serif mb-2">Joint Secretary</h2>
             <p className="text-lg text-[#335288] mb-3">Dr. Shukranti Shrivastava</p>
             <hr className="h-[2px] bg-[#335288] w-[80%] mb-4" />
             <p className="text-sm text-center text-zinc-500">
@@ -241,7 +241,7 @@ const Storyline = () => {
               src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746259326/sapna_ulr1sk.jpg"
               alt="Treasurer"
             />
-            <h2 className="text-xl font-serif mb-2">Treasurer</h2>
+            <h2 className="text-xl text-black font-serif mb-2">Treasurer</h2>
             <p className="text-lg text-[#335288] mb-3">Sapna Shrivastava</p>
             <hr className="h-[2px] bg-[#335288] w-[80%] mb-4" />
             <p className="text-sm text-center text-zinc-500">
@@ -257,7 +257,7 @@ const Storyline = () => {
               src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746259323/awadh_yizveu.jpg"
               alt="Board Member"
             />
-            <h2 className="text-xl font-serif mb-2">Board Member</h2>
+            <h2 className="text-xl text-black font-serif mb-2">Board Member</h2>
             <p className="text-lg text-[#335288] mb-3">Awadh Bihari Gautum</p>
             <hr className="h-[2px] bg-[#335288] w-[80%] mb-4" />
             <p className="text-sm text-center text-zinc-500">
@@ -273,7 +273,7 @@ const Storyline = () => {
               src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746259325/pankaj_owsjx4.png"
               alt="Board Member"
             />
-            <h2 className="text-xl font-serif mb-2">Board Member</h2>
+            <h2 className="text-xl text-black font-serif mb-2">Board Member</h2>
             <p className="text-lg text-[#335288] mb-3">Pankaj Kumar Panthi</p>
             <hr className="h-[2px] bg-[#335288] w-[80%] mb-4" />
             <p className="text-sm text-center text-zinc-500">
