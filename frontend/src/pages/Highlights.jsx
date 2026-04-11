@@ -2,8 +2,10 @@ import { ChevronDownIcon } from '@heroicons/react/solid';
 import html2canvas from 'html2canvas';
 import { jsPDF } from 'jspdf';
 import { useRef, useState } from 'react';
-import axios from '../instant/axios';
+import { useLocation, useNavigate } from 'react-router-dom';
 import SkeletonImage from '../Components/SkeletonImage';
+import { useAuth } from '../context/useAuth';
+import axios from '../instant/axios';
 
 const faqs = [
   {
@@ -21,6 +23,9 @@ const faqs = [
 ];
 
 const Highlights = () => {
+  const { isAuthenticated } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
   const receiptRef = useRef(null);
   const [formType, setFormType] = useState('donor');
   const [form, setForm] = useState({
@@ -320,7 +325,19 @@ const Highlights = () => {
             {formType === 'donor' ? 'Make a Donation' : 'Become a Member'}
           </h2>
 
-          {!paymentClip ? (
+          {!isAuthenticated ? (
+            <div className="flex flex-col items-center justify-center py-10">
+              <p className="text-xl font-serif text-center mb-8 text-[#2b2b29]">
+                Please log in to {formType === 'donor' ? 'make a donation' : 'become a member'}.
+              </p>
+              <button
+                onClick={() => navigate('/auth', { state: { from: location } })}
+                className="w-full sm:w-auto bg-[#2b2b29] text-[#f4efe4] px-10 py-4 uppercase tracking-widest text-sm font-bold shadow hover:bg-black transition-colors"
+              >
+                Log In to Continue
+              </button>
+            </div>
+          ) : !paymentClip ? (
             <form onSubmit={handleSubmit} className="space-y-8">
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-8">

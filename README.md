@@ -254,7 +254,7 @@ Important production recommendations:
 ### Organization Leadership
 
 - President: Narayan Kumar Shrivastav
-- Vice President: Sashi Mishra
+- Vice President: Vijay Kumar khare
 - Secretary: Brajesh Pratap Singh
 - Joint Secretary: Dr. Shukranti Shrivastava
 - Treasurer: Sapna Shrivastava

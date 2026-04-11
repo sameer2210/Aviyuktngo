@@ -248,20 +248,23 @@ export const leadershipTeam = [
   },
   {
     role: 'Vice President',
-    name: 'Sashi Mishra',
-    image: 'https://res.cloudinary.com/dyvccryuz/image/upload/v1746259327/SashiMishra_hkgc3u.jpg',
+    name: 'Vijay Kumar khare',
+    image:
+      'https://res.cloudinary.com/dc2geexnf/image/upload/v1775909805/Screenshot_2026-04-11_171835_gyj9c1.png',
     note: 'Strengthens program execution through consistent field-level coordination and outreach.',
   },
   {
     role: 'Secretary',
     name: 'Brajesh Pratap Singh',
-    image: 'https://res.cloudinary.com/dyvccryuz/image/upload/v1746259323/BrajeshPratapSingh_yxnij7.jpg',
+    image:
+      'https://res.cloudinary.com/dyvccryuz/image/upload/v1746259323/BrajeshPratapSingh_yxnij7.jpg',
     note: 'Supports operations and governance processes that keep implementation structured and accountable.',
   },
   {
     role: 'Joint Secretary',
     name: 'Dr. Shukranti Shrivastava',
-    image: 'https://res.cloudinary.com/dyvccryuz/image/upload/v1746259327/Shukrantishrivastava_vp5dmh.jpg',
+    image:
+      'https://res.cloudinary.com/dyvccryuz/image/upload/v1746259327/Shukrantishrivastava_vp5dmh.jpg',
     note: 'Brings discipline and collaborative leadership across cross-functional activities.',
   },
   {

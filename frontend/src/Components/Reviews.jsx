@@ -13,21 +13,10 @@ const reviews = [
     message: 'An inspiring organization with a heart for real change.',
     img: 'https://res.cloudinary.com/dyvccryuz/image/upload/v1746259324/NaveenShrivastav_c7sa0p.jpg',
   },
-  {
-    name: 'Anand Chauhan',
-    role: 'Donor',
-    message: "Proud to be a supporter. Aviyukt's transparency is remarkable.",
-    img: 'https://res.cloudinary.com/dyvccryuz/image/upload/v1746259324/nandu_lfx39s.png',
-  },
-  {
-    name: 'Ankesh',
-    role: 'Beneficiary',
-    message: 'Our lives changed because Aviyukt believed in us.',
-    img: 'https://res.cloudinary.com/dyvccryuz/image/upload/v1746259326/Anku_so4got.jpg',
-  },
+
   {
     name: 'sameer khan',
-    role: 'Doner',
+    role: 'Beneficiary',
     message: 'Joining Aviyukt was the best decision — it feels like family!',
     img: 'https://res.cloudinary.com/dc2geexnf/image/upload/v1775130745/1742237649179.jpg_c0lfze.jpg',
   },
@@ -82,9 +71,9 @@ const Reviews = () => {
 
   return (
     <section ref={container} className="w-full bg-[#fcfaf5] py-24 px-4 sm:px-10 lg:px-20 overflow-hidden border-t border-gray-200">
-      
+
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 lg:gap-20">
-        
+
         {/* Left Intro Panel */}
         <div ref={titleRef} className="md:w-1/3 flex flex-col justify-center">
           <p className="uppercase tracking-[0.2em] text-xs font-bold text-gray-500 mb-4 border-l-2 border-black pl-3">
@@ -101,8 +90,8 @@ const Reviews = () => {
         {/* Right Cards Grid */}
         <div className="md:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-6">
           {reviews.map((review, index) => (
-            <div 
-              key={index} 
+            <div
+              key={index}
               className={`review-card relative bg-white border border-gray-100 p-8 shadow-sm hover:shadow-xl transition-shadow duration-500 flex flex-col justify-between ${
                 index % 2 === 1 ? 'sm:translate-y-8' : '' // Staggered layout visually
               }`}
