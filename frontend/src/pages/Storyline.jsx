@@ -227,10 +227,10 @@ const Storyline = () => {
               alt="Joint Secretary"
             />
             <h2 className="text-xl text-black font-serif mb-2">Joint Secretary</h2>
-            <p className="text-lg text-[#335288] mb-3">Dr. Shukranti Shrivastava</p>
+            <p className="text-lg text-[#335288] mb-3">Dr. Sukrati shrivastava</p>
             <hr className="h-[2px] bg-[#335288] w-[80%] mb-4" />
             <p className="text-sm text-center text-zinc-500">
-              As Joint Secretary of Aviyukt NGO, Shukranti Shrivastava supports our mission with
+              As Joint Secretary of Aviyukt NGO, Sukrati shrivastava supports our mission with
               passion, ensuring strong teamwork, smooth operations, and impactful community service.
             </p>
           </div>

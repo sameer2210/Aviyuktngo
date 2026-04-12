@@ -256,7 +256,7 @@ Important production recommendations:
 - President: Narayan Kumar Shrivastav
 - Vice President: Vijay Kumar khare
 - Secretary: Brajesh Pratap Singh
-- Joint Secretary: Dr. Shukranti Shrivastava
+- Joint Secretary: Dr. Sukrati shrivastava
 - Treasurer: Sapna Shrivastava
 - Board Member: Awadh Bihari Gautam
 - Board Member: Pankaj Kumar Panthi
