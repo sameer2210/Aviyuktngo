@@ -13,30 +13,16 @@ import { slides } from '../data/homepageContent';
 import axios from '../instant/axios';
 
 const Home = () => {
-  const [isLoading, setIsLoading] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [formData, setFormData] = useState({ email: '' });
 
   useEffect(() => {
-    const loadingTimer = window.setTimeout(() => setIsLoading(false), 900);
-    return () => window.clearTimeout(loadingTimer);
-  }, []);
-
-  useEffect(() => {
-    if (isLoading) {
-      return undefined;
-    }
-
     const interval = window.setInterval(() => {
       setCurrentSlide(prev => (prev + 1) % slides.length);
     }, 5000);
 
     return () => window.clearInterval(interval);
-  }, [isLoading]);
-
-  if (isLoading) {
-    return <HomeLoader />;
-  }
+  }, []);
 
   const handleChange = e => {
     setFormData({
@@ -86,7 +72,8 @@ const Home = () => {
             <div className="relative h-[30vh] md:h-[25vh] w-full md:w-[20vw] overflow-hidden group">
               <SkeletonImage
                 src="https://res.cloudinary.com/dyvccryuz/image/upload/v1746258779/photo23_m0mmu8.jpg"
-                alt=""
+                alt="Green Revolution"
+                loading="lazy"
                 className="h-full w-full object-cover transform group-hover:scale-110 transition-all duration-500"
               />
               <div className="absolute inset-0 bg-black/40 mix-blend-multiply opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
@@ -117,7 +104,8 @@ const Home = () => {
             <div className="relative h-[30vh] md:h-[25vh] w-full md:w-[32%] overflow-hidden group">
               <SkeletonImage
                 src="https://images.unsplash.com/photo-1622908961227-ebf9ccdc342d?q=80&w=2134&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt=""
+                alt="Save Animals"
+                loading="lazy"
                 className="h-full w-full object-cover transform group-hover:scale-110 transition-all duration-500"
               />
               <div className="absolute inset-0 bg-black/40 mix-blend-multiply opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
@@ -129,7 +117,8 @@ const Home = () => {
             <div className="relative h-[30vh] md:h-[25vh] w-full md:w-[32%] overflow-hidden group">
               <SkeletonImage
                 src="https://images.unsplash.com/photo-1709122066713-4c904721a378?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt=""
+                alt="Women Empowerment"
+                loading="lazy"
                 className="h-full w-full object-cover transform group-hover:scale-110 transition-all duration-500"
               />
               <div className="absolute inset-0 bg-black/40 mix-blend-multiply opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
@@ -141,7 +130,8 @@ const Home = () => {
             <div className="relative h-[30vh] md:h-[25vh] w-full md:w-[32%] overflow-hidden group">
               <SkeletonImage
                 src="https://images.pexels.com/photos/764681/pexels-photo-764681.jpeg?auto=compress&cs=tinysrgb&w=600"
-                alt=""
+                alt="Promote Education"
+                loading="lazy"
                 className="h-full w-full object-cover transform group-hover:scale-110 transition-all duration-500"
               />
               <div className="absolute inset-0 bg-black/40 mix-blend-multiply opacity-0 group-hover:opacity-100 transition-all duration-500"></div>

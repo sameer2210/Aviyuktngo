@@ -10,9 +10,49 @@ export default defineConfig({
   ],
   build: {
     outDir: 'dist',
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true, // Remove console.log in production
+        drop_debugger: true,
+      },
+    },
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor': [
+            'react',
+            'react-dom',
+            'react-router-dom',
+          ],
+          'animations': [
+            'gsap',
+            'framer-motion',
+            '@gsap/react',
+          ],
+          'pdf': [
+            'jspdf',
+            'html2pdf.js',
+            'html2canvas',
+            'jspdf-autotable',
+          ],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 1000,
+    sourcemap: false, // Disable sourcemaps in production
   },
   server: {
     // This ensures React Router paths work in dev mode
     historyApiFallback: true,
+  },
+  optimizeDeps: {
+    include: [
+      'react',
+      'react-dom',
+      'react-router-dom',
+      'axios',
+      '@react-oauth/google',
+    ],
   },
 });

@@ -1,6 +1,7 @@
 const dotenv = require('dotenv');
 dotenv.config();
 const express = require('express');
+const compression = require('compression');
 const app = express();
 const contactRoutes = require('./routes/contact.routes.js');
 const razorpayRoutes = require('./routes/payment.routes.js');
@@ -9,6 +10,26 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
+
+// Compression middleware - compress all responses
+app.use(compression({ level: 6, threshold: 1024 }));
+
+// Cache control middleware
+app.use((req, res, next) => {
+  // Static assets - cache for 1 year
+  if (req.url.match(/\.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|eot|ttf)$/)) {
+    res.set('Cache-Control', 'public, max-age=31536000, immutable');
+  }
+  // HTML - cache for 1 hour
+  else if (req.url.endsWith('.html') || req.url === '/') {
+    res.set('Cache-Control', 'public, max-age=3600, must-revalidate');
+  }
+  // API responses - no cache by default
+  else {
+    res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+  }
+  next();
+});
 
 app.use(morgan('tiny'));
 

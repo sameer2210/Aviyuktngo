@@ -15,7 +15,7 @@ export const servicesData = [
     slug: 'agriculture',
     title: 'Agriculture',
     icon: Wheat,
-    image: 'https://images.unsplash.com/photo-1589923188900-85dae523342b?q=80&w=2670&auto=format&fit=crop',
+    image: 'https://images.pexels.com/photos/29912210/pexels-photo-29912210.jpeg?cs=srgb&dl=pexels-abhishek-gupta-186686367-29912210.jpg&fm=jpg',
     shortDescription:
       'Guidance and support for farmers, crop planning, and sustainable cultivation practices.',
     detailDescription:
@@ -37,7 +37,7 @@ export const servicesData = [
     slug: 'medicine',
     title: 'Medicine',
     icon: Pill,
-    image: 'https://images.unsplash.com/photo-1632733711679-529326f6db12?q=80&w=2670&auto=format&fit=crop',
+    image: 'https://images.pexels.com/photos/5738735/pexels-photo-5738735.jpeg?cs=srgb&dl=pexels-dr-aparna-jaswal-3865334-5738735.jpg&fm=jpg',
     shortDescription:
       'Essential medicine support for low-income families and urgent patient assistance.',
     detailDescription:
@@ -59,7 +59,7 @@ export const servicesData = [
     slug: 'health',
     title: 'Health',
     icon: HeartPulse,
-    image: 'https://images.unsplash.com/photo-1596525164802-b2d9b68a865f?q=80&w=2670&auto=format&fit=crop',
+    image: 'https://images.pexels.com/photos/7465700/pexels-photo-7465700.jpeg?cs=srgb&dl=pexels-mikhail-nilov-7465700.jpg&fm=jpg',
     shortDescription:
       'Community health drives, preventive awareness, and wellness outreach programs.',
     detailDescription:
