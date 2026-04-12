@@ -23,6 +23,11 @@ const faqs = [
 ];
 
 const Highlights = () => {
+  const highlightsBackgroundSrc =
+    'https://res.cloudinary.com/dc2geexnf/image/upload/v1775721910/WhatsApp_Image3_2026-04-09_at_11.12.19_AM_wmhsdo.jpg';
+  const highlightsBackgroundFallbackSrc =
+    'https://res.cloudinary.com/dc2geexnf/image/upload/v1775721852/WhatsApp_Image_2026-04-09_at_11.12.18_AM_eorwl1.jpg';
+
   const { isAuthenticated } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
@@ -275,17 +280,25 @@ const Highlights = () => {
     : [];
 
   return (
-    <div className="font-sans min-h-screen flex flex-col relative w-full bg-black">
+    <div className="font-sans min-h-screen flex flex-col relative w-full bg-[#10141c]">
       {/* Immersive Background Image */}
-      <img
-        src="https://images.unsplash.com/photo-1593113563332-ceecb38b1d24?q=80&w=2670&auto=format&fit=crop"
-        alt="Background"
-        className="fixed inset-0 w-full h-full object-cover filter brightness-[0.4]"
+      <SkeletonImage
+        src={highlightsBackgroundSrc}
+        fallbackSrc={highlightsBackgroundFallbackSrc}
+        maxRetries={2}
+        alt="Highlights page background"
+        loading="eager"
+        fetchPriority="high"
+        wrapperClassName="fixed inset-0 h-full w-full z-0"
+        className="h-full w-full object-cover brightness-[0.72] saturate-[1.08]"
+        skeletonClassName="from-[#1d2533] via-[#273247] to-[#1a2130]"
+        errorClassName="bg-[#1b2230] text-[#dbe4f7]"
       />
-      
+      <div aria-hidden className="fixed inset-0 z-0 bg-black/35" />
+
       {/* Main Container */}
       <div className="relative z-10 w-full min-h-screen flex flex-col pt-28 pb-16 px-4 items-center justify-start">
-        
+
         {/* Toggle Form Type */}
         <div className="flex gap-4 mb-10 w-full max-w-sm">
           <button
