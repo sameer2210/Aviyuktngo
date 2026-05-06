@@ -14,16 +14,17 @@ const visionHTML = (
 const missionPoints = [
   'To empower marginalized communities through education and vocational training.',
   'To improve access to quality healthcare and sanitation in rural areas.',
-  'To promote women rights and economic self-reliance.',
-  'To foster awareness on environmental sustainability and climate action.',
   'To facilitate social inclusion for people with disabilities and the elderly.',
 ];
 
-const objectiveLeadHTML = (
-  <>
-    Objectives include health and sanitation awareness, women and adolescent empowerment, rights-based inclusion, sustainable agriculture,<br className="hidden md:block" /> livelihood support for tribal and Dalit communities, climate resilience,<br className="hidden md:block" /> and thoughtful water resource management.
-  </>
-);
+const visionHighlights = [
+  'To promote women rights and economic self-reliance.',
+  'To foster awareness on environmental sustainability and climate action.',
+  'To create a just and equitable society where everyone can access education, healthcare, and dignified opportunities.',
+];
+
+const missionObjective =
+  'Objectives include health and sanitation awareness, women and adolescent empowerment, rights-based inclusion, sustainable agriculture, livelihood support for tribal and Dalit communities, climate resilience, and thoughtful water resource management.';
 
 const galleryImages = [
   'https://res.cloudinary.com/dc2geexnf/image/upload/v1775758274/558bbe83-c94e-4d9b-8395-50f8df170193.jpg_u4ocuf.jpg',
@@ -80,6 +81,26 @@ const FadeUp = ({ children, delay = 0, className = '' }) => (
   </motion.div>
 );
 
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.08,
+    },
+  },
+};
+
+const staggerItem = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: [0.21, 0.47, 0.32, 0.98] },
+  },
+};
+
 const AimMissionSection = () => {
   return (
     <>
@@ -93,30 +114,87 @@ const AimMissionSection = () => {
           <div className="flex flex-col pt-10">
             <FadeUp>
               <div className="flex items-center gap-6 mb-16">
-                <h2 className="museum-serif text-sm sm:text-base font-semibold uppercase tracking-[0.2em] text-[#102e54]">
-                  ABOUT AVIYUKT VISION AIM AND MISSION
+                <h2 className="museum-serif text-base sm:text-lg md:text-xl font-semibold uppercase tracking-[0.24em] text-[#102e54]">
+                  THE AVIYUKT PURPOSE FRAMEWORK
                 </h2>
               </div>
             </FadeUp>
 
             <FadeUp delay={0.1}>
-              <h3 className="museum-serif max-w-[42rem] mb-6 text-[2rem] sm:text-[2.5rem] lg:text-[3.25rem] leading-[1.3] tracking-wide text-black">
-                {visionHTML}
+              <h3 className="museum-serif max-w-[52rem] mb-8 text-[2.45rem] sm:text-[3rem] md:text-[3.55rem] lg:text-[4.2rem] leading-[1.06] tracking-[0.01em] text-[#111111]">
+                Vision, Aim & Mission
               </h3>
             </FadeUp>
 
-            <FadeUp delay={0.2} className="mt-10 lg:mt-12 space-y-4">
-              {missionPoints.map((point, index) => (
-                <p key={index} className="museum-serif text-[1rem] sm:text-[1.1rem] leading-[1.8] text-[#0d2238] max-w-[36rem]">
-                  {point}
-                </p>
-              ))}
+            <FadeUp delay={0.16}>
+              <p className="max-w-[44rem] text-[1rem] sm:text-[1.08rem] md:text-[1.12rem] leading-relaxed text-[#24374f]">
+                A focused roadmap for social change, centered on dignity, access, and long-term
+                community resilience.
+              </p>
             </FadeUp>
 
-            <FadeUp delay={0.3} className="mt-12 lg:mt-16">
-              <p className="museum-serif text-[0.95rem] sm:text-[1.05rem] leading-[1.9] text-[#2c2b29] max-w-[40rem]">
-                {objectiveLeadHTML}
-              </p>
+            <FadeUp delay={0.22} className="mt-10">
+              <motion.div
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: '-10%' }}
+                className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6"
+              >
+              <motion.article
+                variants={staggerItem}
+                whileHover={{ y: -8, scale: 1.01 }}
+                transition={{ duration: 0.25, ease: 'easeOut' }}
+                className="md:-translate-y-6 border border-[#295c9b]/20 bg-gradient-to-br from-[#e9f2ff] via-[#f3f7ff] to-[#e2edff] p-6 sm:p-7 shadow-[0_18px_36px_rgba(41,92,155,0.14)]"
+              >
+                <h4 className="museum-serif text-xl sm:text-2xl font-bold text-[#183b66] mb-4">
+                  Vision Highlights
+                </h4>
+                <p className="text-[0.98rem] sm:text-[1.03rem] leading-relaxed text-[#18314f] mb-4">
+                  {visionHTML}
+                </p>
+                <div className="space-y-3">
+                  {visionHighlights.map((point, index) => (
+                    <motion.p
+                      key={index}
+                      variants={staggerItem}
+                      whileHover={{ x: 6 }}
+                      transition={{ duration: 0.2 }}
+                      className="text-[0.95rem] sm:text-[1rem] leading-relaxed text-[#0e2a47]"
+                    >
+                      {point}
+                    </motion.p>
+                  ))}
+                </div>
+              </motion.article>
+
+              <motion.article
+                variants={staggerItem}
+                whileHover={{ y: -8, scale: 1.01 }}
+                transition={{ duration: 0.25, ease: 'easeOut' }}
+                className="md:translate-y-6 border border-[#b93b26]/20 bg-gradient-to-br from-[#fff0ec] via-[#fff8f4] to-[#ffece6] p-6 sm:p-7 shadow-[0_18px_36px_rgba(185,59,38,0.14)]"
+              >
+                <h4 className="museum-serif text-xl sm:text-2xl font-bold text-[#8c2a19] mb-4">
+                  Mission Highlights
+                </h4>
+                <div className="space-y-3 mb-4">
+                  {missionPoints.map((point, index) => (
+                    <motion.p
+                      key={index}
+                      variants={staggerItem}
+                      whileHover={{ x: 6 }}
+                      transition={{ duration: 0.2 }}
+                      className="text-[0.95rem] sm:text-[1rem] leading-relaxed text-[#5b241a]"
+                    >
+                      {point}
+                    </motion.p>
+                  ))}
+                </div>
+                <p className="text-[0.93rem] sm:text-[0.98rem] leading-relaxed text-[#6a2b20]">
+                  {missionObjective}
+                </p>
+              </motion.article>
+              </motion.div>
             </FadeUp>
           </div>
 
